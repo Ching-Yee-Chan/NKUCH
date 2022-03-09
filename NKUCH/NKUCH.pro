@@ -17,13 +17,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    entry.cpp
+    entry.cpp \
+    nkuch.cpp
 
 HEADERS += \
-    entry.h
+    entry.h \
+    nkuch.h
 
 FORMS += \
-    entry.ui
+    entry.ui \
+    nkuch.ui
 
 TRANSLATIONS += \
     NKUCH_zh_CN.ts
