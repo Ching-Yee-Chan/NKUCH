@@ -16,16 +16,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    loading.cpp \
     main.cpp \
     entry.cpp \
     nkuch.cpp
 
 HEADERS += \
+    dataset.h \
     entry.h \
+    loading.h \
     nkuch.h
 
 FORMS += \
     entry.ui \
+    loading.ui \
     nkuch.ui
 
 TRANSLATIONS += \

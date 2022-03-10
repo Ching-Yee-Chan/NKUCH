@@ -33,6 +33,15 @@ NKUCH::~NKUCH()
     delete ui;
 }
 
+void NKUCH::initPersonalInfo(Entry& entry)
+{
+    grade=entry.grade;
+    major=entry.major;
+    subMajor=entry.subMajor;
+    campus=entry.campus;
+    intercampus=entry.intercampus;
+}
+
 void NKUCH::initialize()
 {
     QString temp = major+" "+subMajor+" 大"+weekConv(grade)+" ";
@@ -46,4 +55,24 @@ void NKUCH::initialize()
     resExec=false;
     searchExec=false;
     entryExec=false;
+}
+//读取不上课时段
+void NKUCH::spareTimeInit()
+{
+
+}
+void NKUCH::getInfo()
+{
+
+}
+void NKUCH::on_run_clicked()
+{
+    if(resExec){ //防止同时打开两个生成窗口
+        QMessageBox::warning(this,"警告","请不要同时打开两个相同的窗口。",QMessageBox::Ok);
+        return;
+    }
+    resExec=true;
+    Loading loading; //渲染加载窗口
+    loading.show();
+
 }
