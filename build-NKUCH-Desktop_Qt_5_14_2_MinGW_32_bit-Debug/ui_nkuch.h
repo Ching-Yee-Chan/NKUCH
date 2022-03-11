@@ -86,6 +86,7 @@ public:
     QLineEdit *lineEdit_14;
     QSpinBox *maxRes;
     QTextBrowser *textBrowser;
+    QPushButton *exceptionMorning;
 
     void setupUi(QWidget *NKUCH)
     {
@@ -428,13 +429,13 @@ public:
         exceptionClear->setFont(font1);
         exceptionWeekend = new QPushButton(NKUCH);
         exceptionWeekend->setObjectName(QString::fromUtf8("exceptionWeekend"));
-        exceptionWeekend->setGeometry(QRect(480, 560, 111, 31));
+        exceptionWeekend->setGeometry(QRect(480, 560, 91, 31));
         sizePolicy.setHeightForWidth(exceptionWeekend->sizePolicy().hasHeightForWidth());
         exceptionWeekend->setSizePolicy(sizePolicy);
         exceptionWeekend->setFont(font1);
         exceptionNoon = new QPushButton(NKUCH);
         exceptionNoon->setObjectName(QString::fromUtf8("exceptionNoon"));
-        exceptionNoon->setGeometry(QRect(630, 560, 111, 31));
+        exceptionNoon->setGeometry(QRect(580, 560, 91, 31));
         sizePolicy.setHeightForWidth(exceptionNoon->sizePolicy().hasHeightForWidth());
         exceptionNoon->setSizePolicy(sizePolicy);
         exceptionNoon->setFont(font1);
@@ -533,6 +534,9 @@ public:
         textBrowser->setGeometry(QRect(20, 760, 901, 61));
         textBrowser->setStyleSheet(QString::fromUtf8("background-color:rgba(0,0,0,0);"));
         textBrowser->setFrameShape(QFrame::NoFrame);
+        exceptionMorning = new QPushButton(NKUCH);
+        exceptionMorning->setObjectName(QString::fromUtf8("exceptionMorning"));
+        exceptionMorning->setGeometry(QRect(680, 560, 93, 31));
 
         retranslateUi(NKUCH);
 
@@ -674,6 +678,7 @@ public:
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">\346\234\252\350\242\253\351\200\211\345\205\245\344\273\245\344\270\212\351\203\250\345\210\206\347\232\204\350\200\201\345\270\210/\345\274\200\350\257\276\345\255\246\351\231\242/\350\257\276\347\250\213\357\274\214\351\273\230\350\256\244\345\205\266\344\274\230\345\205\210\345\272\246\344\270\2721\343\200\202\344\274\230\345"
                         "\205\210\345\272\246\350\266\212\351\253\230\357\274\214\347\224\237\346\210\220\350\257\276\350\241\250\346\227\266\350\266\212\345\205\210\350\200\203\350\231\221\350\257\245\351\200\211\351\241\271\343\200\202</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">\345\246\202\346\236\234\344\274\230\345\205\210\345\272\246\350\256\276\347\275\256\344\270\272100\357\274\214\350\257\245\351\241\271\345\260\206\346\234\200\345\205\210\350\242\253\350\200\203\350\231\221\357\274\233\345\246\202\346\236\234\344\274\230\345\205\210\345\272\246\350\256\276\347\275\256\344\270\2720\357\274\214\351\202\243\344\271\210\350\257\245\351\241\271\345\260\206\345\234\250\347\224\237\346\210\220\350\257\276\350\241\250\346\227\266\347\233\264\346\216\245\350\242\253\345\277\275\347\225\245\343\200\202</p></body></html>", nullptr));
+        exceptionMorning->setText(QCoreApplication::translate("NKUCH", "\346\227\251\345\205\253\344\270\215\344\270\212\350\257\276", nullptr));
     } // retranslateUi
 
 };

@@ -160,4 +160,25 @@ public:
         return iterator;
     }
 };
+
+struct Major{//用于偏好学院
+    QString name;
+    int priority;
+};
+Q_DECLARE_METATYPE(Major)
+
+struct Teacher{//用于偏好教师
+    QString name;
+    QString dept;
+    QString teacherId;
+    int priority;
+};
+Q_DECLARE_METATYPE(Teacher)
+
+struct Duration{//用于不上课时段
+    int day;//1-7
+    int start;//1-14
+    int end;
+};
+Q_DECLARE_METATYPE(Duration)
 #endif // DATASET_H

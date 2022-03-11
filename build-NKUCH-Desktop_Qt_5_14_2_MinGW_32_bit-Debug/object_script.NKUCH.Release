@@ -1,0 +1,11 @@
+release/loading.o
+release/main.o
+release/entry.o
+release/nkuch.o
+release/search.o
+release/teachersearch.o
+release/moc_entry.o
+release/moc_loading.o
+release/moc_nkuch.o
+release/moc_search.o
+release/moc_teachersearch.o

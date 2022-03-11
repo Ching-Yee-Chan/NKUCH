@@ -4,7 +4,8 @@
 #include <fstream>
 #include <QApplication>
 
-const char* filepath = "D:\\git\\NKUCH\\NKUCH\\course.txt";//请自行修改文件路径！
+const char* filepath1 = "D:\\git\\NKUCH\\NKUCH\\course.txt";//请自行修改文件路径！
+const char* filepath2 = "D:\\git\\NKUCH\\NKUCH\\detail.txt";//请自行修改文件路径！
 
 //文件读取（C风格，自底向上）============================================================================================
 void reader(std::string readhead, int& saver, std::fstream& a);
@@ -17,10 +18,11 @@ void ReaderForArrangeInfo(arrangeInfo*, std::fstream& a);
 void ReaderForLessonGroups(expLessonGroups*, std::fstream& a);
 void inputer(ArrayForClass &arr);
 const std::string COMMA = ";";
-
+//函数定义=============================================================================================================
 void inputer(ArrayForClass& arr)                          //对整个文件操作用
 {
-    std::fstream a(filepath); //读取文件选择
+    std::fstream a(filepath1); //JSON格式文件
+
     std::string lessonJSONsBack = "";
     if(a.is_open()){
     a >> lessonJSONsBack;
@@ -30,6 +32,7 @@ void inputer(ArrayForClass& arr)                          //对整个文件操�
     }
     while (COMMA != lessonJSONsBack) { //检测是否到了lessonJSONs尾部的分号
         ReaderForClass(arr.iterator->now, a);
+
         a >> lessonJSONsBack; //读到上一项的},
         a >> lessonJSONsBack; //读到下一项的{
         arr.add();

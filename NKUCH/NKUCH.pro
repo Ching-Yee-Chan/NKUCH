@@ -19,18 +19,24 @@ SOURCES += \
     loading.cpp \
     main.cpp \
     entry.cpp \
-    nkuch.cpp
+    nkuch.cpp \
+    search.cpp \
+    teachersearch.cpp
 
 HEADERS += \
     dataset.h \
     entry.h \
     loading.h \
-    nkuch.h
+    nkuch.h \
+    search.h \
+    teachersearch.h
 
 FORMS += \
     entry.ui \
     loading.ui \
-    nkuch.ui
+    nkuch.ui \
+    search.ui \
+    teachersearch.ui
 
 TRANSLATIONS += \
     NKUCH_zh_CN.ts

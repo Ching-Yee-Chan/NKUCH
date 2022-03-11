@@ -1313,7 +1313,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>480</x>
      <y>560</y>
-     <width>111</width>
+     <width>91</width>
      <height>31</height>
     </rect>
    </property>
@@ -1336,9 +1336,9 @@ p, li { white-space: pre-wrap; }
   <widget class="QPushButton" name="exceptionNoon">
    <property name="geometry">
     <rect>
-     <x>630</x>
+     <x>580</x>
      <y>560</y>
-     <width>111</width>
+     <width>91</width>
      <height>31</height>
     </rect>
    </property>
@@ -1708,6 +1708,19 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;关于优先度：&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;未被选入以上部分的老师/开课学院/课程，默认其优先度为1。优先度越高，生成课表时越先考虑该选项。&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;如果优先度设置为100，该项将最先被考虑；如果优先度设置为0，那么该项将在生成课表时直接被忽略。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="exceptionMorning">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>560</y>
+     <width>93</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>早八不上课</string>
    </property>
   </widget>
  </widget>

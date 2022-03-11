@@ -21,6 +21,82 @@ inline int campusConv(QString s){ //校区编号变整数
     else return -1;
 }
 
+inline QString majorConv(QString s){ //把开课单位名转换成相应的四位英文代码
+    if(s=="通识选修课") return "UPEC";
+    else if(s=="公共英语教学部") return "ENTD";
+    else if(s=="马克思主义基础理论教学部") return "IPTD";
+    else if(s=="高等数学教学部") return "AMTD";
+    else if(s=="人工智能学院") return "ARIN";
+    else if(s=="商学院") return "BUSI";
+    else if(s=="化学学院") return "CHEM";
+    else if(s=="汉语言文化学院") return "CHIN";
+    else if(s=="经济学院") return "ECON";
+    else if(s=="计算机学院") return "COMP";
+    else if(s=="公共计算机基础教学部") return "COTD";
+    else if(s=="网络空间安全学院") return "CSSE";
+    else if(s=="电子信息与光学工程学院") return "ELEC";
+    else if(s=="环境科学与工程学院") return "ENVI";
+    else if(s=="金融学院") return "FINA";
+    else if(s=="外国语学院") return "FORE";
+    else if(s=="周恩来政府管理学院") return "GOVE";
+    else if(s=="法学院") return "LAWS";
+    else if(s=="历史学院") return "HIST";
+    else if(s=="生命科学学院") return "LIFE";
+    else if(s=="文学院") return "LITE";
+    else if(s=="数学科学学院") return "MATH";
+    else if(s=="材料科学学院") return "MATE";
+    else if(s=="军事教研室") return "MITD";
+    else if(s=="马克思主义学院") return "MARX";
+    else if(s=="医学院") return "MEDS";
+    else if(s=="物理科学学院") return "PHYS";
+    else if(s=="药学院") return "PHAR";
+    else if(s=="哲学院") return "PHIL";
+    else if(s=="旅游与服务学院") return "TOUR";
+    else if(s=="统计与数据科学学院") return "STAT";
+    else if(s=="软件学院") return "SOFT";
+    else if(s=="天津大学管理与经济学部") return "TUDD";
+    else if(s=="体育部") return "PETDS";
+    else return "UPEC";
+}
+
+inline QString majorToWord(QString s){ //把四位英文代码转换成文字
+    if(s=="UPEC") return "通识选修课";
+    else if(s=="ENTD") return "公共英语教学部";
+    else if(s=="IPTD") return "马克思主义基础理论教学部";
+    else if(s=="AMTD") return "高等数学教学部";
+    else if(s=="ARIN") return "人工智能学院";
+    else if(s=="BUSI") return "商学院";
+    else if(s=="CHEM") return "化学学院";
+    else if(s=="CHIN") return "汉语言文化学院";
+    else if(s=="ECON") return "经济学院";
+    else if(s=="COMP") return "计算机学院";
+    else if(s=="COTD") return "公共计算机基础教学部";
+    else if(s=="CSSE") return "网络空间安全学院";
+    else if(s=="ELEC") return "电子信息与光学工程学院";
+    else if(s=="ENVI") return "环境科学与工程学院";
+    else if(s=="FINA") return "金融学院";
+    else if(s=="FORE") return "外国语学院";
+    else if(s=="GOVE") return "周恩来政府管理学院";
+    else if(s=="LAWS") return "法学院";
+    else if(s=="HIST") return "历史学院";
+    else if(s=="LIFE") return "生命科学学院";
+    else if(s=="LITE") return "文学院";
+    else if(s=="MATH") return "数学科学学院";
+    else if(s=="MATE") return "材料科学学院";
+    else if(s=="MITD") return "军事教研室";
+    else if(s=="MARX") return "马克思主义学院";
+    else if(s=="MEDS") return "医学院";
+    else if(s=="PHYS") return "物理科学学院";
+    else if(s=="PHAR") return "药学院";
+    else if(s=="PHIL") return "哲学院";
+    else if(s=="TOUR") return "旅游与服务学院";
+    else if(s=="STAT") return "统计与数据科学学院";
+    else if(s=="SOFT") return "软件学院";
+    else if(s=="TUDD") return "天津大学管理与经济学部";
+    else if(s=="PETDS") return "体育部";//其实没有体育
+    else return "通识选修课";
+}
+
 NKUCH::NKUCH(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::NKUCH)
@@ -65,6 +141,242 @@ void NKUCH::getInfo()
 {
 
 }
+//界面响应函数============================================================================
+//偏好学院
+void NKUCH::on_majorPush_clicked()
+{
+    Qitem *obj=new Qitem;
+    if(ui->majorPf->currentIndex()){
+        for(int i=0;i<ui->majorList->count();i++){ //查找表中是否已经包含该对象
+            if(ui->majorList->item(i)->text().split(' ')[0]==ui->majorPf->currentText()){
+                QMessageBox::StandardButton response =
+                        QMessageBox::question(this,"重复","该课程已在列表中，是否修改分数？", QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Yes);
+                if(response == QMessageBox::Yes)
+                    obj = ui->majorList->item(i);
+                else return;
+            }
+        }
+        Major temp={ui->majorPf->currentText(),ui->majorNum->value()};
+        obj->setData(Qt::UserRole,QVariant::fromValue(temp));
+        obj->setText(temp.name+" "+QString::number(temp.priority)); //设置显示标题
+        if(ui->majorList->selectedItems().empty()) //判定所选对象是否为空
+            ui->majorList->addItem(obj);
+        else
+            ui->majorList->insertItem(ui->majorList->currentRow(),obj);
+    }
+}
+
+void NKUCH::on_majorPop_clicked()
+{
+    if(!ui->majorList->selectedItems().empty())
+        ui->majorList->takeItem(ui->majorList->currentRow());
+}
+
+void NKUCH::on_majorRate_clicked()
+{
+    if(!ui->majorList->selectedItems().empty()){
+        QString str=ui->majorList->currentItem()->data(Qt::UserRole).value<Major>().name;
+        Major temp={str,ui->majorNum->value()};
+        ui->majorList->currentItem()->setData(Qt::UserRole,QVariant::fromValue(temp));
+        ui->majorList->currentItem()->setText(temp.name+" "+QString::number(temp.priority));//设置显示标题
+    }
+}
+//偏好教师~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void NKUCH::on_teacherPush_clicked()
+{
+    QString name=ui->teacherPf->toPlainText();
+    if(name!=""){
+        QVector<Teacher> teachers;
+        Teacher temp;
+        for(course.iterator=course.begin;course.iterator!=course.end;course.iterator=course.iterator->next){//检查该老师是否存在
+            if(course.iterator->now->teachers.indexOf(name)>=0){
+                QString dept = majorToWord(course.iterator->now->code.left(4));
+                Teacher temp = {course.iterator->now->teachers, dept, course.iterator->now->teacherIds, 0};
+                bool found = false;
+                for(int i=0;i<teachers.size();i++){
+                    if(temp.teacherId==teachers[i].teacherId){
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found)
+                    teachers.append(temp);
+            }
+        }
+        course.iterator=course.begin;
+        if(teachers.empty()){
+            QMessageBox::warning(this,"注意","该老师不存在，或是本学期没有安排课程。",QMessageBox::Ok);
+            return;
+        }
+        if(teachers.size() == 1)
+            temp = teachers[0];
+        else
+        {
+            TeacherSearch resultTable;
+            resultTable.initialize(teachers);
+            resultTable.show();
+            if(resultTable.exec()==QDialog::Accepted)
+            {
+                temp = resultTable.chosen;
+            }
+        }
+        temp.priority = ui->teacherNum->text().toInt();
+        Qitem *obj=new Qitem;
+        for(int i=0;i<ui->teacherList->count();i++){ //查找表中是否已经包含该对象
+            if(ui->teacherList->item(i)->text().split(' ')[1]==temp.teacherId){
+                QMessageBox::StandardButton response =
+                        QMessageBox::question(this,"重复","该教师已在列表中，是否修改分数？", QMessageBox::Yes | QMessageBox::Cancel, QMessageBox::Yes);
+                if(response == QMessageBox::Yes)
+                    obj = ui->teacherList->item(i);
+                else return;
+            }
+        }
+        obj->setData(Qt::UserRole,QVariant::fromValue(temp));
+        obj->setText(temp.name+" "+temp.teacherId+" "+QString::number(temp.priority)+" "+temp.dept);//设置显示标题
+        if(ui->teacherList->selectedItems().empty()) //判定所选对象是否为空
+            ui->teacherList->addItem(obj);
+        else
+            ui->teacherList->insertItem(ui->teacherList->currentRow(),obj);
+    }
+    else QMessageBox::warning(this, "提示", "教师姓名不能为空！", QMessageBox::Ok);
+}
+
+void NKUCH::on_teacherRate_clicked()
+{
+    if(!ui->teacherList->selectedItems().empty()){
+        Teacher temp = ui->teacherList->currentItem()->data(Qt::UserRole).value<Teacher>();
+        temp.priority = ui->teacherNum->text().toInt();
+        ui->teacherList->currentItem()->setData(Qt::UserRole,QVariant::fromValue(temp));
+        ui->teacherList->currentItem()->setText(temp.name+" "+temp.teacherId+" "+QString::number(temp.priority)+" "+temp.dept);//设置显示标题
+    }
+}
+
+void NKUCH::on_teacherPop_clicked()
+{
+    if(!ui->teacherList->selectedItems().empty())
+        ui->teacherList->takeItem(ui->majorList->currentRow());
+}
+//不上课时段~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~·~~~~~~~
+void NKUCH::on_exceptionPush_clicked()
+{
+    int day=ui->week->currentIndex()+1;
+    int start=ui->start->currentIndex()+1;
+    int end;
+    if(ui->end->currentIndex()==0) end=start;
+    else end=ui->end->currentIndex();
+    if(end<start){
+        QMessageBox::warning(this, "警告", "起始时间不能晚于中止时间！",QMessageBox::Ok);
+        return;
+    }
+    Duration dur={day,start,end};
+    Qitem *obj=new Qitem;
+    obj->setData(Qt::UserRole,QVariant::fromValue(dur)); //注：自定义结构体不能直接setData
+    for(int i=0;i<ui->exceptionList->count();i++) //查重
+    {
+        Duration _dur=ui->exceptionList->item(i)->data(Qt::UserRole).value<Duration>();
+        int _day=_dur.day;
+        if(_day==dur.day){
+            int _start=_dur.start;
+            int _end=_dur.end;
+            if((_start<=start&&start<=_end+1)||(_start-1<=end&&end<=_end)){ //合并两个具有交集的时段
+                int __start=_start>start?start:_start;
+                int __end=_end<end?end:_end;
+                Duration temp{_day,__start,__end};
+                ui->exceptionList->item(i)->setData(Qt::UserRole,QVariant::fromValue(temp));
+                if(__start!=__end) ui->exceptionList->item(i)->setText("星期"+weekConv(day)+" "+QString::number(__start)+"-"+QString::number(__end)+"节");
+                else ui->exceptionList->item(i)->setText("星期"+weekConv(day)+" "+QString::number(__start)+"节");
+                return;
+            }
+        }
+    }
+    if(start!=end) obj->setText("星期"+weekConv(day)+" "+QString::number(start)+"-"+QString::number(end)+"节");
+    else obj->setText("星期"+weekConv(day)+" "+QString::number(start)+"节");
+    if(ui->exceptionList->selectedItems().empty()) //判定所选对象是否为空
+        ui->exceptionList->addItem(obj);
+    else
+        ui->exceptionList->insertItem(ui->exceptionList->currentRow(),obj);
+}
+
+void NKUCH::on_exceptionPop_clicked()
+{
+    if(!ui->exceptionList->selectedItems().empty())
+        ui->exceptionList->takeItem(ui->exceptionList->currentRow());
+}
+
+void NKUCH::on_exceptionClear_clicked()
+{
+    ui->exceptionList->clear();
+}
+
+void NKUCH::on_exceptionWeekend_clicked()
+{
+    //先把原有的周末时段全部删除
+    std::stack<int> del;
+    for(int i=0;i<ui->exceptionList->count();i++)
+    {
+        if(ui->exceptionList->item(i)->data(Qt::UserRole).value<Duration>().day>=6)
+            del.push(i);
+    }
+    while(!del.empty())
+    {
+        ui->exceptionList->takeItem(del.top());
+        del.pop();
+    }
+    //插入新的周末时段
+    Duration temp{6,1,14};
+    Qitem *obj=new Qitem;
+    obj->setData(Qt::UserRole,QVariant::fromValue(temp));
+    obj->setText("星期六 1-14节");
+    ui->exceptionList->addItem(obj);
+    temp = {7,1,14};
+    obj = new Qitem;
+    obj->setData(Qt::UserRole,QVariant::fromValue(temp));
+    obj->setText("星期日 1-14节");
+    ui->exceptionList->addItem(obj);
+}
+
+void NKUCH::on_exceptionNoon_clicked()
+{
+    noClassInRange(5, 6);
+}
+
+void NKUCH::on_exceptionNight_clicked()
+{
+    noClassInRange(13, 14);
+}
+
+void NKUCH::on_exceptionMorning_clicked()
+{
+    noClassInRange(1, 1);
+}
+
+void NKUCH::noClassInRange(int begin, int end)
+{
+    for(int day=1;day<8;day++){
+        Duration dur={day,begin,end};
+        Qitem *obj=new Qitem;
+        for(int i=0;i<ui->exceptionList->count();i++) //开始遍历
+        {
+            Duration _dur=ui->exceptionList->item(i)->data(Qt::UserRole).value<Duration>();
+            int _day=_dur.day;
+            if(_day==dur.day){
+                int _start=_dur.start;
+                int _end=_dur.end;
+                if((_start<=begin&&begin<=_end+1)||(_start-1<=end&&end<=_end)){ //合并两个具有交集的时段
+                    Duration temp{_day,_start>begin?begin:_start,_end<end?end:_end};
+                    ui->exceptionList->item(i)->setData(Qt::UserRole,QVariant::fromValue(temp));
+                    ui->exceptionList->item(i)->setText("星期"+weekConv(day)+" "+QString::number(_start>begin?begin:_start)+"-"+QString::number(_end<end?end:_end)+"节");
+                    delete obj;
+                    goto label1;
+                }
+            }
+        }
+        obj->setData(Qt::UserRole,QVariant::fromValue(dur));
+        obj->setText("星期"+weekConv(day)+" "+QString::number(begin)+"-"+QString::number(end)+"节");
+        ui->exceptionList->addItem(obj);
+        label1:;
+    }
+}
 void NKUCH::on_run_clicked()
 {
     if(resExec){ //防止同时打开两个生成窗口
@@ -75,4 +387,50 @@ void NKUCH::on_run_clicked()
     Loading loading; //渲染加载窗口
     loading.show();
 
+}
+
+
+
+
+
+
+
+void NKUCH::on_search_clicked()
+{
+    if(searchExec){
+        QMessageBox::warning(this,"警告","请不要同时打开两个相同的窗口。",QMessageBox::Ok);
+        return;
+    }
+    searchExec=true;
+    search sec(this);
+    sec.campus0=(campus==0);
+    sec.campus1=(campus==1);
+    sec.campus2=(campus==2);
+    sec.intercampus=intercampus;
+    sec.course=course;
+    sec.initialize();
+    if(sec.exec()==QDialog::Accepted){
+        ;
+//        ClassInfo result=sec.res;
+//        sec.close();
+//        Qitem *obj=new Qitem;
+//        QString text=QString::number(result.priority)+" "
+//                    +result.name+" "+result.teachers
+//                    +" "+QString::number(result.startWeek)+"-"+QString::number(result.endWeek)+"周 ";
+//        for(int i=0;i<result.arrangeSize;i++)
+//            if(result.arrange[i].startUnit!=result.arrange[i].endUnit)
+//            text+= "周"+weekConv(result.arrange[i].weekDay)
+//                   +QString::number(result.arrange[i].startUnit)+"-"+QString::number(result.arrange[i].endUnit)+"节 ";
+//            else text+= "周"+weekConv(result.arrange[i].weekDay)
+//                   +QString::number(result.arrange[i].startUnit)+"节 ";
+//        text+=result.courseTypeName+" "+result.campusName;
+//        obj->setData(Qt::UserRole,QVariant::fromValue(result));
+//        obj->setText(text);
+//        ui->courseList->addItem(obj);  //添加新课程
+//        searchExec=false;
+    }
+//    else{
+//        searchExec=false;
+//        sec.close();
+//    }
 }
