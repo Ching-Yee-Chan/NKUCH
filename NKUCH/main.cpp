@@ -2,6 +2,7 @@
 #include "nkuch.h"
 #include "dataset.h"
 #include <fstream>
+#include <iostream>
 #include <QApplication>
 
 const char* filepath1 = "D:\\git\\NKUCH\\NKUCH\\course.txt";//请自行修改文件路径！
@@ -16,13 +17,16 @@ void reader(std::string readhead, bool *saver, std::fstream& a);//读weekstate�
 void ReaderForClass(ClassInfo*, std::fstream& a);
 void ReaderForArrangeInfo(arrangeInfo*, std::fstream& a);
 void ReaderForLessonGroups(expLessonGroups*, std::fstream& a);
+void readOneItem(std::fstream& in, QString& current, std::string& nextTitle);
+void readItem(std::fstream& in, ClassInfo& cur, std::string& nextTitle, bool& label);
+void readDetail(std::fstream& in, bool& label, ArrayForClass& arr);
 void inputer(ArrayForClass &arr);
 const std::string COMMA = ";";
 //函数定义=============================================================================================================
 void inputer(ArrayForClass& arr)                          //对整个文件操作用
 {
     std::fstream a(filepath1); //JSON格式文件
-
+    std::fstream b(filepath2); //爬取得到的课程详情
     std::string lessonJSONsBack = "";
     if(a.is_open()){
     a >> lessonJSONsBack;
@@ -32,12 +36,13 @@ void inputer(ArrayForClass& arr)                          //对整个文件操�
     }
     while (COMMA != lessonJSONsBack) { //检测是否到了lessonJSONs尾部的分号
         ReaderForClass(arr.iterator->now, a);
-
         a >> lessonJSONsBack; //读到上一项的},
         a >> lessonJSONsBack; //读到下一项的{
         arr.add();
         ++arr;
     }
+    bool label = true;
+    readDetail(b, label, arr);
 }
 
 void ReaderForClass(ClassInfo* kecheng, std::fstream& a) {
@@ -192,6 +197,76 @@ void reader(std::string readhead, QString& saver, std::fstream& a)
         }
     }
     saver = QString::fromStdString(_saver);
+}
+
+void readDetail(std::fstream& in, bool& label, ArrayForClass& arr)
+{
+    arr.iterator = arr.begin;
+    std::string nextTitle;
+    ClassInfo trashCan;
+    readItem(in, trashCan, nextTitle, label);
+    //此时读取至第一个“名称”之后
+    while (label)
+    {
+        std::string _name;
+        in >> _name;
+        while (arr.iterator->now->name.indexOf(QString::fromStdString(_name))<0) {
+            //std::cout << _name << std::endl;//调试使用
+            if(arr.iterator->now->name==""){
+                while(arr.iterator->now->name=="")
+                    arr.iterator = arr.iterator->next;
+                while(arr.iterator->now->name.indexOf(QString::fromStdString(_name))<0){
+                    nextTitle = "";
+                    readItem(in, trashCan, nextTitle, label);
+                    in>>_name;
+                }
+            }
+            else arr.iterator = arr.iterator->next;
+        }
+        nextTitle = "";
+        readItem(in, *(arr.iterator->now), nextTitle, label);
+        arr.iterator = arr.iterator->next;
+    }
+}
+
+void readOneItem(std::fstream& in, QString& current, std::string& nextTitle)
+{
+    std::string temp;
+    while (temp != "名称:" && temp != "成绩记录方式：" && temp != "考核方式:" && temp != "课程简介:" &&
+        temp != "英文简介:" && temp != "教学目标:" && temp != "教学安排:" && temp != "要求建议:" &&
+        temp != "所用教材:" && temp != "参考文献:" && temp != "附件下载:" &&temp != "$END$" &&
+        temp != "考核方式:" && temp != "课程简介:" && temp != "课程考核:" && temp != "中文简介:" &&
+        temp != "课程目标:" && temp != "课程内容与教学安排:" && temp != "课程教材与参考资料:")
+    {
+        current += QString::fromStdString(temp);
+        in >> temp;
+    }
+    nextTitle = temp;
+}
+
+void readItem(std::fstream& in, ClassInfo& cur, std::string& nextTitle, bool& label)
+{
+    if (nextTitle == "考核方式:"||nextTitle == "课程考核:") readOneItem(in, cur.examType, nextTitle);
+    else if (nextTitle == "成绩记录方式：") readOneItem(in, cur.gradeType, nextTitle);
+    else if (nextTitle == "课程简介"|| nextTitle == "中文简介:") readOneItem(in, cur.intro, nextTitle);
+    else if (nextTitle == "英文简介:"|| nextTitle == "英文课程简介:") readOneItem(in, cur.enIntro, nextTitle);
+    else if (nextTitle == "教学目标:"|| nextTitle == "课程目标:") readOneItem(in, cur.goal, nextTitle);
+    else if (nextTitle == "教学安排:"|| nextTitle == "课程内容与教学安排:") readOneItem(in, cur.plan, nextTitle);
+    else if (nextTitle == "所用教材:"|| nextTitle == "课程教材与参考资料:") readOneItem(in, cur.textbooks, nextTitle);
+    else if (nextTitle == "参考文献:") readOneItem(in, cur.reference, nextTitle);
+    else if (nextTitle == "要求建议:") readOneItem(in, cur.suggestion, nextTitle);
+    else if (nextTitle == "名称:") return;
+    else if (nextTitle == "$END$")
+    {
+        label = false;
+        return;
+    }
+    else
+    {
+        QString trash;
+        readOneItem(in, trash, nextTitle);
+    }
+    readItem(in, cur, nextTitle, label);
 }
 //程序入口======================================================================
 int main(int argc, char *argv[])

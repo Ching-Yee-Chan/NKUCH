@@ -1,9 +1,11 @@
+debug/detail.o
 debug/loading.o
 debug/main.o
 debug/entry.o
 debug/nkuch.o
 debug/search.o
 debug/teachersearch.o
+debug/moc_detail.o
 debug/moc_entry.o
 debug/moc_loading.o
 debug/moc_nkuch.o

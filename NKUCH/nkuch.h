@@ -61,6 +61,24 @@ private slots:
 
     void on_search_clicked();
 
+    void on_courseRate_clicked();
+
+    void on_coursePop_clicked();
+
+    void on_maximum_valueChanged(int arg1);
+
+    void on_minimum_valueChanged(int arg1);
+
+    void on_start_currentIndexChanged(int index);
+
+    void on_end_currentIndexChanged(int index);
+
+    void on_cancel_clicked();
+
+    void on_reChoose_clicked();
+
+    void on_intercampus_stateChanged(int arg1);
+
 private:
     void spareTimeInit();
     void getInfo();

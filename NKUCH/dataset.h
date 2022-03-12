@@ -3,6 +3,19 @@
 #include<QWidget>
 namespace Ui { struct ClassInfo; struct arrangeInfo; struct expLessonGroups;}
 
+static inline QString weekConv(int a){ //数字变汉字
+    switch(a){
+    case 1:return "一";
+    case 2:return "二";
+    case 3:return "三";
+    case 4:return "四";
+    case 5:return "五";
+    case 6:return "六";
+    case 7:return "日";
+    default:return "?";
+    }
+}
+
 struct arrangeInfo {
     int weekDay = 0;
     bool weekState[54] = {};//[1]为第一周
@@ -62,6 +75,16 @@ struct ClassInfo
     int arrangeSize = 0;
     int expSize = 0;
     int priority = 1;
+//以下为课程详情=====================================================================
+    QString examType;//考核方式
+    QString gradeType;//成绩记录方式
+    QString intro;//课程简介
+    QString enIntro;//英文简介
+    QString goal;//教学目标
+    QString plan;//教学安排
+    QString suggestion;//要求建议
+    QString reference;//参考文献
+//==================================================================================
     friend bool operator==(ClassInfo _a,ClassInfo _b){
         return _a.id==_b.id;
     }

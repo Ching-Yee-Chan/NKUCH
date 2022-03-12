@@ -531,7 +531,7 @@ public:
         textBrowser = new QTextBrowser(NKUCH);
         textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
         textBrowser->setEnabled(true);
-        textBrowser->setGeometry(QRect(20, 760, 901, 61));
+        textBrowser->setGeometry(QRect(20, 760, 711, 61));
         textBrowser->setStyleSheet(QString::fromUtf8("background-color:rgba(0,0,0,0);"));
         textBrowser->setFrameShape(QFrame::NoFrame);
         exceptionMorning = new QPushButton(NKUCH);

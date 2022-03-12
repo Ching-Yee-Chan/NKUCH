@@ -245,9 +245,9 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>340</y>
+     <y>370</y>
      <width>431</width>
-     <height>341</height>
+     <height>311</height>
     </rect>
    </property>
    <property name="widgetResizable">
@@ -259,7 +259,7 @@ p, li { white-space: pre-wrap; }
       <x>0</x>
       <y>0</y>
       <width>429</width>
-      <height>339</height>
+      <height>309</height>
      </rect>
     </property>
    </widget>
@@ -475,9 +475,9 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>340</y>
+     <y>370</y>
      <width>431</width>
-     <height>341</height>
+     <height>311</height>
     </rect>
    </property>
   </widget>
@@ -554,6 +554,46 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>泰达</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_10">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>330</y>
+     <width>421</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>BlankCursor</cursorShape>
+   </property>
+   <property name="mouseTracking">
+    <bool>false</bool>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgba(0,0,0,0);</string>
+   </property>
+   <property name="text">
+    <string>3.双击以查看课程详情</string>
+   </property>
+   <property name="frame">
+    <bool>false</bool>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

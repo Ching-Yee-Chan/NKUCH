@@ -48,6 +48,7 @@ public:
     QLineEdit *lineEdit_9;
     QTextEdit *code;
     QCheckBox *campus2;
+    QLineEdit *lineEdit_10;
 
     void setupUi(QDialog *search)
     {
@@ -116,11 +117,11 @@ public:
         cancel->setGeometry(QRect(390, 240, 51, 28));
         scrollArea_3 = new QScrollArea(search);
         scrollArea_3->setObjectName(QString::fromUtf8("scrollArea_3"));
-        scrollArea_3->setGeometry(QRect(10, 340, 431, 341));
+        scrollArea_3->setGeometry(QRect(10, 370, 431, 311));
         scrollArea_3->setWidgetResizable(true);
         scrollAreaWidgetContents_4 = new QWidget();
         scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 429, 339));
+        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 429, 309));
         scrollArea_3->setWidget(scrollAreaWidgetContents_4);
         score = new QSpinBox(search);
         score->setObjectName(QString::fromUtf8("score"));
@@ -182,7 +183,7 @@ public:
         lineEdit_8->setReadOnly(true);
         courseList = new QListWidget(search);
         courseList->setObjectName(QString::fromUtf8("courseList"));
-        courseList->setGeometry(QRect(10, 340, 431, 341));
+        courseList->setGeometry(QRect(10, 370, 431, 311));
         lineEdit_9 = new QLineEdit(search);
         lineEdit_9->setObjectName(QString::fromUtf8("lineEdit_9"));
         lineEdit_9->setEnabled(true);
@@ -201,6 +202,17 @@ public:
         campus2 = new QCheckBox(search);
         campus2->setObjectName(QString::fromUtf8("campus2"));
         campus2->setGeometry(QRect(300, 200, 91, 31));
+        lineEdit_10 = new QLineEdit(search);
+        lineEdit_10->setObjectName(QString::fromUtf8("lineEdit_10"));
+        lineEdit_10->setEnabled(true);
+        lineEdit_10->setGeometry(QRect(10, 330, 421, 31));
+        lineEdit_10->setFont(font);
+        lineEdit_10->setCursor(QCursor(Qt::BlankCursor));
+        lineEdit_10->setMouseTracking(false);
+        lineEdit_10->setAutoFillBackground(false);
+        lineEdit_10->setStyleSheet(QString::fromUtf8("background-color:rgba(0,0,0,0);"));
+        lineEdit_10->setFrame(false);
+        lineEdit_10->setReadOnly(true);
 
         retranslateUi(search);
 
@@ -244,6 +256,7 @@ public:
 "</style></head><body style=\" font-family:'SimSun'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
         campus2->setText(QCoreApplication::translate("search", "\346\263\260\350\276\276", nullptr));
+        lineEdit_10->setText(QCoreApplication::translate("search", "3.\345\217\214\345\207\273\344\273\245\346\237\245\347\234\213\350\257\276\347\250\213\350\257\246\346\203\205", nullptr));
     } // retranslateUi
 
 };

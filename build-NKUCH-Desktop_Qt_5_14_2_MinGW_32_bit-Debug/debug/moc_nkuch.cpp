@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_NKUCH_t {
-    QByteArrayData data[17];
-    char stringdata0[352];
+    QByteArrayData data[28];
+    char stringdata0[576];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -48,7 +48,18 @@ QT_MOC_LITERAL(12, 227, 27), // "on_exceptionWeekend_clicked"
 QT_MOC_LITERAL(13, 255, 24), // "on_exceptionNoon_clicked"
 QT_MOC_LITERAL(14, 280, 25), // "on_exceptionNight_clicked"
 QT_MOC_LITERAL(15, 306, 27), // "on_exceptionMorning_clicked"
-QT_MOC_LITERAL(16, 334, 17) // "on_search_clicked"
+QT_MOC_LITERAL(16, 334, 17), // "on_search_clicked"
+QT_MOC_LITERAL(17, 352, 21), // "on_courseRate_clicked"
+QT_MOC_LITERAL(18, 374, 20), // "on_coursePop_clicked"
+QT_MOC_LITERAL(19, 395, 23), // "on_maximum_valueChanged"
+QT_MOC_LITERAL(20, 419, 4), // "arg1"
+QT_MOC_LITERAL(21, 424, 23), // "on_minimum_valueChanged"
+QT_MOC_LITERAL(22, 448, 28), // "on_start_currentIndexChanged"
+QT_MOC_LITERAL(23, 477, 5), // "index"
+QT_MOC_LITERAL(24, 483, 26), // "on_end_currentIndexChanged"
+QT_MOC_LITERAL(25, 510, 17), // "on_cancel_clicked"
+QT_MOC_LITERAL(26, 528, 19), // "on_reChoose_clicked"
+QT_MOC_LITERAL(27, 548, 27) // "on_intercampus_stateChanged"
 
     },
     "NKUCH\0on_run_clicked\0\0on_majorPush_clicked\0"
@@ -61,7 +72,12 @@ QT_MOC_LITERAL(16, 334, 17) // "on_search_clicked"
     "on_exceptionNoon_clicked\0"
     "on_exceptionNight_clicked\0"
     "on_exceptionMorning_clicked\0"
-    "on_search_clicked"
+    "on_search_clicked\0on_courseRate_clicked\0"
+    "on_coursePop_clicked\0on_maximum_valueChanged\0"
+    "arg1\0on_minimum_valueChanged\0"
+    "on_start_currentIndexChanged\0index\0"
+    "on_end_currentIndexChanged\0on_cancel_clicked\0"
+    "on_reChoose_clicked\0on_intercampus_stateChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -71,7 +87,7 @@ static const uint qt_meta_data_NKUCH[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      24,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -79,21 +95,30 @@ static const uint qt_meta_data_NKUCH[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   89,    2, 0x08 /* Private */,
-       3,    0,   90,    2, 0x08 /* Private */,
-       4,    0,   91,    2, 0x08 /* Private */,
-       5,    0,   92,    2, 0x08 /* Private */,
-       6,    0,   93,    2, 0x08 /* Private */,
-       7,    0,   94,    2, 0x08 /* Private */,
-       8,    0,   95,    2, 0x08 /* Private */,
-       9,    0,   96,    2, 0x08 /* Private */,
-      10,    0,   97,    2, 0x08 /* Private */,
-      11,    0,   98,    2, 0x08 /* Private */,
-      12,    0,   99,    2, 0x08 /* Private */,
-      13,    0,  100,    2, 0x08 /* Private */,
-      14,    0,  101,    2, 0x08 /* Private */,
-      15,    0,  102,    2, 0x08 /* Private */,
-      16,    0,  103,    2, 0x08 /* Private */,
+       1,    0,  134,    2, 0x08 /* Private */,
+       3,    0,  135,    2, 0x08 /* Private */,
+       4,    0,  136,    2, 0x08 /* Private */,
+       5,    0,  137,    2, 0x08 /* Private */,
+       6,    0,  138,    2, 0x08 /* Private */,
+       7,    0,  139,    2, 0x08 /* Private */,
+       8,    0,  140,    2, 0x08 /* Private */,
+       9,    0,  141,    2, 0x08 /* Private */,
+      10,    0,  142,    2, 0x08 /* Private */,
+      11,    0,  143,    2, 0x08 /* Private */,
+      12,    0,  144,    2, 0x08 /* Private */,
+      13,    0,  145,    2, 0x08 /* Private */,
+      14,    0,  146,    2, 0x08 /* Private */,
+      15,    0,  147,    2, 0x08 /* Private */,
+      16,    0,  148,    2, 0x08 /* Private */,
+      17,    0,  149,    2, 0x08 /* Private */,
+      18,    0,  150,    2, 0x08 /* Private */,
+      19,    1,  151,    2, 0x08 /* Private */,
+      21,    1,  154,    2, 0x08 /* Private */,
+      22,    1,  157,    2, 0x08 /* Private */,
+      24,    1,  160,    2, 0x08 /* Private */,
+      25,    0,  163,    2, 0x08 /* Private */,
+      26,    0,  164,    2, 0x08 /* Private */,
+      27,    1,  165,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -111,6 +136,15 @@ static const uint qt_meta_data_NKUCH[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   20,
+    QMetaType::Void, QMetaType::Int,   20,
+    QMetaType::Void, QMetaType::Int,   23,
+    QMetaType::Void, QMetaType::Int,   23,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   20,
 
        0        // eod
 };
@@ -136,10 +170,18 @@ void NKUCH::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 12: _t->on_exceptionNight_clicked(); break;
         case 13: _t->on_exceptionMorning_clicked(); break;
         case 14: _t->on_search_clicked(); break;
+        case 15: _t->on_courseRate_clicked(); break;
+        case 16: _t->on_coursePop_clicked(); break;
+        case 17: _t->on_maximum_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 18: _t->on_minimum_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 19: _t->on_start_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 20: _t->on_end_currentIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 21: _t->on_cancel_clicked(); break;
+        case 22: _t->on_reChoose_clicked(); break;
+        case 23: _t->on_intercampus_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject NKUCH::staticMetaObject = { {
@@ -171,13 +213,13 @@ int NKUCH::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 24)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 24;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 24)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 15;
+        _id -= 24;
     }
     return _id;
 }

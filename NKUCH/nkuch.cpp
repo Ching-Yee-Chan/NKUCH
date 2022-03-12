@@ -1,19 +1,6 @@
 ﻿#include "nkuch.h"
 #include "ui_nkuch.h"
 
-inline QString weekConv(int a){ //数字变汉字
-    switch(a){
-    case 1:return "一";
-    case 2:return "二";
-    case 3:return "三";
-    case 4:return "四";
-    case 5:return "五";
-    case 6:return "六";
-    case 7:return "日";
-    default:return "?";
-    }
-}
-
 inline int campusConv(QString s){ //校区编号变整数
     if(s=="01") return 0;
     else if(s=="03") return 2;
@@ -264,10 +251,6 @@ void NKUCH::on_exceptionPush_clicked()
     int end;
     if(ui->end->currentIndex()==0) end=start;
     else end=ui->end->currentIndex();
-    if(end<start){
-        QMessageBox::warning(this, "警告", "起始时间不能晚于中止时间！",QMessageBox::Ok);
-        return;
-    }
     Duration dur={day,start,end};
     Qitem *obj=new Qitem;
     obj->setData(Qt::UserRole,QVariant::fromValue(dur)); //注：自定义结构体不能直接setData
@@ -307,7 +290,7 @@ void NKUCH::on_exceptionClear_clicked()
 {
     ui->exceptionList->clear();
 }
-
+//周末不上课按钮
 void NKUCH::on_exceptionWeekend_clicked()
 {
     //先把原有的周末时段全部删除
@@ -334,17 +317,17 @@ void NKUCH::on_exceptionWeekend_clicked()
     obj->setText("星期日 1-14节");
     ui->exceptionList->addItem(obj);
 }
-
+//中午不上课按钮
 void NKUCH::on_exceptionNoon_clicked()
 {
     noClassInRange(5, 6);
 }
-
+//晚八以后不上课按钮
 void NKUCH::on_exceptionNight_clicked()
 {
     noClassInRange(13, 14);
 }
-
+//早八不上课按钮
 void NKUCH::on_exceptionMorning_clicked()
 {
     noClassInRange(1, 1);
@@ -377,24 +360,7 @@ void NKUCH::noClassInRange(int begin, int end)
         label1:;
     }
 }
-void NKUCH::on_run_clicked()
-{
-    if(resExec){ //防止同时打开两个生成窗口
-        QMessageBox::warning(this,"警告","请不要同时打开两个相同的窗口。",QMessageBox::Ok);
-        return;
-    }
-    resExec=true;
-    Loading loading; //渲染加载窗口
-    loading.show();
-
-}
-
-
-
-
-
-
-
+//必修课选课====================================================================================================
 void NKUCH::on_search_clicked()
 {
     if(searchExec){
@@ -410,27 +376,133 @@ void NKUCH::on_search_clicked()
     sec.course=course;
     sec.initialize();
     if(sec.exec()==QDialog::Accepted){
-        ;
-//        ClassInfo result=sec.res;
-//        sec.close();
-//        Qitem *obj=new Qitem;
-//        QString text=QString::number(result.priority)+" "
-//                    +result.name+" "+result.teachers
-//                    +" "+QString::number(result.startWeek)+"-"+QString::number(result.endWeek)+"周 ";
-//        for(int i=0;i<result.arrangeSize;i++)
-//            if(result.arrange[i].startUnit!=result.arrange[i].endUnit)
-//            text+= "周"+weekConv(result.arrange[i].weekDay)
-//                   +QString::number(result.arrange[i].startUnit)+"-"+QString::number(result.arrange[i].endUnit)+"节 ";
-//            else text+= "周"+weekConv(result.arrange[i].weekDay)
-//                   +QString::number(result.arrange[i].startUnit)+"节 ";
-//        text+=result.courseTypeName+" "+result.campusName;
-//        obj->setData(Qt::UserRole,QVariant::fromValue(result));
-//        obj->setText(text);
-//        ui->courseList->addItem(obj);  //添加新课程
-//        searchExec=false;
+        QStack<ClassInfo> result=sec.res;
+        sec.close();
+        while(!result.empty())
+        {
+            ClassInfo temp = result.top();
+            result.pop();
+            Qitem *obj=new Qitem;
+            QString text=QString::number(temp.priority)+" "
+                    +temp.name+" "+temp.teachers
+                    +" "+QString::number(temp.startWeek)+"-"+QString::number(temp.endWeek)+"周 ";
+        for(int i=0;i<temp.arrangeSize;i++)
+            if(temp.arrange[i].startUnit!=temp.arrange[i].endUnit)
+            text+= "周"+weekConv(temp.arrange[i].weekDay)
+                   +QString::number(temp.arrange[i].startUnit)+"-"+QString::number(temp.arrange[i].endUnit)+"节 ";
+            else text+= "周"+weekConv(temp.arrange[i].weekDay)
+                   +QString::number(temp.arrange[i].startUnit)+"节 ";
+        text+=temp.courseTypeName+" "+temp.campusName;
+        obj->setData(Qt::UserRole,QVariant::fromValue(temp));
+        obj->setText(text);
+        ui->courseList->addItem(obj);  //添加新课程
+        searchExec=false;
+        }
     }
-//    else{
-//        searchExec=false;
-//        sec.close();
-//    }
+    else{
+        searchExec=false;
+        sec.close();
+    }
+}
+
+void NKUCH::on_courseRate_clicked()
+{
+    if(!ui->courseList->selectedItems().empty()){
+        ClassInfo dup=ui->courseList->currentItem()->data(Qt::UserRole).value<ClassInfo>();
+        dup.priority=ui->courseNum->value();
+        QString text=QString::number(dup.priority)+" "
+                    +dup.name+" "+dup.teachers
+                    +" "+QString::number(dup.startWeek)+"-"+QString::number(dup.endWeek)+"周 ";
+        for(int i=0;i<dup.arrangeSize;i++)
+            if(dup.arrange[i].startUnit!=dup.arrange[i].endUnit)
+            text+= "周"+weekConv(dup.arrange[i].weekDay)
+                   +QString::number(dup.arrange[i].startUnit)+"-"+QString::number(dup.arrange[i].endUnit)+"节 ";
+            else text+= "周"+weekConv(dup.arrange[i].weekDay)
+                   +QString::number(dup.arrange[i].startUnit)+"节 ";
+        text+=dup.courseTypeName+" "+dup.campusName;
+        ui->courseList->currentItem()->setData(Qt::UserRole,QVariant::fromValue<ClassInfo>(dup)); //赋分操作
+        ui->courseList->currentItem()->setText(text);
+    }
+}
+
+void NKUCH::on_coursePop_clicked()
+{
+    if(!ui->courseList->selectedItems().empty())
+        ui->courseList->takeItem(ui->courseList->currentRow());
+}
+//其他小的响应函数=================================================================================================
+void NKUCH::on_intercampus_stateChanged(int arg1)
+{
+    intercampus=ui->intercampus->isChecked();
+}
+
+void NKUCH::on_maximum_valueChanged(int arg1)
+{
+    if(arg1<ui->minimum->value())
+        ui->minimum->setValue(ui->maximum->value());
+}
+
+void NKUCH::on_minimum_valueChanged(int arg1)
+{
+    if(arg1>ui->maximum->value())
+        ui->minimum->setValue(ui->maximum->value());
+}
+
+void NKUCH::on_start_currentIndexChanged(int index)
+{
+    if(ui->end->currentIndex()!=0 && index>=ui->end->currentIndex())
+        ui->end->setCurrentIndex(0);
+}
+
+void NKUCH::on_end_currentIndexChanged(int index)
+{
+    if(index!=0 && index<=ui->start->currentIndex())
+        ui->end->setCurrentIndex(0);
+}
+
+void NKUCH::on_cancel_clicked()
+{
+    QApplication::quit();
+}
+
+void NKUCH::on_reChoose_clicked()
+{
+    if(entryExec){
+        QMessageBox::warning(this,"警告","请不要同时打开两个相同的窗口。",QMessageBox::Ok);
+        return;
+    }
+    entryExec=true;
+    Entry ent;
+    ent.grade=grade;
+    ent.major=major;
+    ent.subMajor=subMajor;
+    ent.campus=campus;
+    ent.intercampus=intercampus;
+    ent.show();
+    if(ent.exec()==QDialog::Accepted){
+        grade=ent.grade;
+        major=ent.major;
+        subMajor=ent.subMajor;
+        campus=ent.campus;
+        intercampus=ent.intercampus;
+        ent.close();
+        initialize();
+        entryExec=false;
+    }
+    else{
+        entryExec=false;
+        ent.close();
+    }
+}
+//启动！=======================================================================================================
+void NKUCH::on_run_clicked()
+{
+    if(resExec){ //防止同时打开两个生成窗口
+        QMessageBox::warning(this,"警告","请不要同时打开两个相同的窗口。",QMessageBox::Ok);
+        return;
+    }
+    resExec=true;
+    Loading loading; //渲染加载窗口
+    loading.show();
+
 }

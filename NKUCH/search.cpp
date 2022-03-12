@@ -16,6 +16,7 @@ search::~search()
 void search::initialize(){ //初始化
     ui->campus0->setChecked(campus0);
     ui->campus1->setChecked(campus1);
+    ui->courseList->setSelectionMode(QAbstractItemView::ExtendedSelection);
     show();
 }
 
@@ -35,6 +36,20 @@ bool search::compare(const QString& data, QStringList teacher) const
         }
     }
     return including;
+}
+
+QString infoOf(ClassInfo obj){ //输出课程的信息
+    QString text=obj.name+" "+obj.no+" "+obj.teachers+" "
+            +" "+QString::number(obj.startWeek)+"-"+QString::number(obj.endWeek)+"周 ";
+    for(int i=0;i<obj.arrangeSize;i++){
+        if(obj.arrange[i].startTime!=obj.arrange[i].endTime)
+            text+= "周"+weekConv(obj.arrange[i].weekDay)
+                   +QString::number(obj.arrange[i].startUnit)+"-"+QString::number(obj.arrange[i].endUnit)+"节 ";
+            else text+= "周"+weekConv(obj.arrange[i].weekDay)
+                   +QString::number(obj.arrange[i].startUnit)+"节 ";
+        text+=obj.courseTypeName+" "+obj.campusName;
+    }
+    return text;
 }
 
 void search::on_run_clicked()
@@ -75,7 +90,7 @@ void search::on_run_clicked()
             Qitem* obj=new Qitem;
             r.priority=ui->score->value(); //设置优先值
             obj->setData(Qt::UserRole,QVariant::fromValue(r));
-            obj->setText(r.name+" "+r.no+" "+r.teachers+" "+r.campusName+" "+r.courseTypeName);
+            obj->setText(infoOf(r));
             ui->courseList->addItem(obj);
             ui->courseList->setCurrentRow(0);
         }
@@ -97,4 +112,36 @@ void search::on_campus1_stateChanged(int arg1)
 void search::on_campus2_stateChanged(int arg1)
 {
     campus2 = arg1;
+}
+
+void search::on_result_clicked()
+{
+    if(ui->courseList->selectedItems().empty()){
+        QMessageBox::warning(this,"提示","没有选择任何课程。",QMessageBox::Ok);
+    }
+    else{
+        for(int i=0;i<ui->courseList->selectedItems().size();i++)
+        {
+            res.push(ui->courseList->selectedItems().at(i)->data(Qt::UserRole).value<ClassInfo>());
+            res.top().priority=ui->score->value();
+        }
+        QDialog::accept();
+    }
+}
+
+void search::on_cancel_clicked()
+{
+    QDialog::reject();
+}
+
+void search::on_courseList_itemDoubleClicked(QListWidgetItem *item)
+{
+    Detail detail;
+    ClassInfo temp = item->data(Qt::UserRole).value<ClassInfo>();
+    detail.initialize(temp);
+    detail.show();
+    if(detail.exec()==QDialog::Accepted)
+    {
+        ;
+    }
 }

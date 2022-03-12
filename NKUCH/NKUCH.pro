@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    detail.cpp \
     loading.cpp \
     main.cpp \
     entry.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 
 HEADERS += \
     dataset.h \
+    detail.h \
     entry.h \
     loading.h \
     nkuch.h \
@@ -32,6 +34,7 @@ HEADERS += \
     teachersearch.h
 
 FORMS += \
+    detail.ui \
     entry.ui \
     loading.ui \
     nkuch.ui \
