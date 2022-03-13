@@ -1,6 +1,11 @@
 ﻿#include "nkuch.h"
 #include "ui_nkuch.h"
 
+const double majorWeight = 0.5;
+const double teacherWeight = 0.5;
+const int myMajorLoyalty = 50;
+const int otherMajorDecline = 30;
+
 inline int campusConv(QString s){ //校区编号变整数
     if(s=="01") return 0;
     else if(s=="03") return 2;
@@ -119,16 +124,81 @@ void NKUCH::initialize()
     searchExec=false;
     entryExec=false;
 }
-//读取不上课时段
+//读取学院偏好==============================================================================================================
+void NKUCH::getPrefMajor()
+{
+    for(int i=0;i<ui->majorList->count();i++){ //遍历偏好专业列表
+        int val=ui->majorList->item(i)->data(Qt::UserRole).value<Major>().priority;
+        QString obj=majorConv(ui->majorList->item(i)->data(Qt::UserRole).value<Major>().name);
+        for(course.iterator=course.begin;course.iterator!=course.end;course.iterator=course.iterator->next)
+            if(course.iterator->now->code.indexOf(obj)>=0)
+                course.iterator->now->priority+=val*majorWeight;
+    }
+}
+//读取教师偏好
+void NKUCH::getPrefTeacher()
+{
+    for(int i=0;i<ui->majorList->count();i++){ //遍历偏好教师列表
+        int val=ui->teacherList->item(i)->data(Qt::UserRole).value<Teacher>().priority;
+        QString obj=ui->teacherList->item(i)->data(Qt::UserRole).value<Teacher>().teacherId;
+        for(course.iterator=course.begin;course.iterator!=course.end;course.iterator=course.iterator->next)
+            if(course.iterator->now->teacherIds.indexOf(val)>=0)
+                course.iterator->now->priority+=val*teacherWeight;
+    }
+}
+//不上课时段作为编号9999的必修课加入===============================================================================================
 void NKUCH::spareTimeInit()
 {
-
+    for(int i=0;i<ui->exceptionList->count();i++){
+        Duration temp=ui->exceptionList->item(i)->data(Qt::UserRole).value<Duration>();
+        ClassInfo _temp;
+        _temp.no=QString::number(9999);
+        _temp.arrangeSize = 1;
+        _temp.arrange[0].weekDay = temp.day;
+        _temp.arrange[0].startUnit = temp.start;
+        _temp.arrange[0].endUnit = temp.end;
+        std::vector<ClassInfo> tempVector;
+        tempVector.push_back(_temp);
+        majorList.push_back(tempVector);
+    }
 }
-void NKUCH::getInfo()
+//读取选修课、必修课清单
+void NKUCH::getCourseList()
 {
-
+    for(course.iterator=course.begin;course.iterator!=course.end;course.iterator=course.iterator->next){
+        ClassInfo temp = *(course.iterator->now);
+        if(temp.isMajor){//必修课，加入必修课清单
+            bool find = false;
+            for(int i = 0;i<majorList.size();i++){
+                if(majorList[i][0].code == temp.code){//同一门课，不同老师
+                    majorList[i].push_back(temp);
+                    find = true;
+                    break;
+                }
+            }
+            if(find) continue;
+            std::vector<ClassInfo> tempVector;
+            tempVector.push_back(temp);
+            majorList.push_back(tempVector);
+        }
+        else{
+            if(temp.code.indexOf(majorConv(major))>=0){
+                if(temp.courseTypeName==D_COURSE){//专业选修课，加分
+                    temp.priority += myMajorLoyalty;
+                }
+                else if(!temp.isMajor&&temp.courseTypeName!=E_COURSE){//本专业必修课，且不是本学期安排的必修课，排除
+                    temp.priority = 0;
+                }
+            }
+            else if(temp.courseTypeName!=E_COURSE){//其他专业专业课，减分
+                temp.priority -= otherMajorDecline;
+            }
+            if(temp.priority) minorList.push_back(temp);//加入选修课心愿单
+        }
+    }
 }
-//界面响应函数============================================================================
+
+//界面响应函数=======================================================================================
 //偏好学院
 void NKUCH::on_majorPush_clicked()
 {

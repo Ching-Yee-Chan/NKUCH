@@ -1,6 +1,6 @@
 ﻿#ifndef ALGORITHM_H
 #define ALGORITHM_H
-#include "nkuch.h"
+#include "dataset.h"
 
 struct possibleTable
 {
@@ -94,13 +94,6 @@ public:
     }
 private:
     linkListNode* front, *rear;
-};
-class algorithm
-{
-public:
-
-private:
-
 };
 
 #endif // ALGORITHM_H

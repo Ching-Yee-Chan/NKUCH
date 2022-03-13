@@ -9,11 +9,19 @@
 #include "dataset.h"
 #include "search.h"
 #include "teachersearch.h"
+#include "algorithm.h"
 #include <QVector>
 #include <QListWidgetItem>
 #include <stack>
 
 typedef QListWidgetItem Qitem;
+
+
+const QString A_COURSE="通识必修课程";
+const QString B_COURSE="大类基础课程";
+const QString C_COURSE="专业必修课程";
+const QString D_COURSE="专业选修课程";
+const QString E_COURSE="通识选修课程";
 
 namespace Ui {
 class NKUCH;
@@ -79,9 +87,13 @@ private slots:
     void on_intercampus_stateChanged(int arg1);
 
 private:
+    void getPrefMajor();
+    void getPrefTeacher();
     void spareTimeInit();
+    void getCourseList();
     void getInfo();
     void noClassInRange(int begin, int end);
+    void costTableInit();
     Ui::NKUCH *ui;
     int grade;
     QString major;
@@ -91,5 +103,8 @@ private:
     bool resExec; //结果窗口是否打开
     bool entryExec; //重新选择窗口是否打开
     bool searchExec; //搜索窗口是否打开
+    std::vector<std::vector<ClassInfo>> majorList;
+    std::vector<ClassInfo> minorList;
+    int costTable[7][14];
 };
 #endif // NKUCH_H

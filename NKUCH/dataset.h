@@ -74,7 +74,7 @@ struct ClassInfo
     struct expLessonGroups group[12];
     int arrangeSize = 0;
     int expSize = 0;
-    int priority = 1;
+    int priority = 0;
     bool isMajor = false;
 //以下为课程详情=====================================================================
     QString examType;//考核方式
