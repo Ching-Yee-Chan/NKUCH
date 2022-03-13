@@ -197,7 +197,61 @@ void NKUCH::getCourseList()
         }
     }
 }
-
+//生成各时段分数最高选修课表（机会成本）=============================================================================
+void NKUCH::costTableInit()
+{
+    memset(costTable, 0, 7 * 14 * 4);
+    for (int i = 0;i<minorList.size();i++)
+        for(int j = 0;j<minorList[i].arrangeSize;j++)
+            for(int k=minorList[i].arrange[j].startUnit-1;k<minorList[i].arrange[j].endUnit;k++)
+                if (minorList[i].priority > costTable[minorList[i].arrange[j].weekDay - 1][j])
+                    costTable[minorList[i].arrange[j].weekDay - 1][j] = minorList[i].priority;
+}
+//核心算法一：必修课候选课表生成
+void NKUCH::generateMajor()
+{
+    int tableCount=0; //生成课表的数目
+    linkListQueue QUEUE;
+    for (std::vector<ClassInfo>::iterator it = majorList[0].begin();it < majorList[0].end();++it)//首门课入队
+    {
+        linkListNode* p = new linkListNode(*it);
+        QUEUE.insert(p);
+    }
+    while (!QUEUE.isEmpty())
+    {
+        linkListNode* p = QUEUE.getElement(); //出队并返回该值
+        int i = p->lessonAmount;
+        for (std::vector<ClassInfo>::iterator it = majorList[i].begin();it < majorList[i].end();++it) //逐个必修课遍历
+        {
+            bool judge = true;//判断变量，false为冲突
+            for(int i = 0;i<it->arrangeSize&&judge;i++)
+            {
+                for(int j = it->arrange[i].startTime-1;j<it->arrange[i].endTime;j++)
+                    if(p->table[it->arrange[i].weekDay-1][j])
+                    {
+                        judge = false;
+                        break;
+                    }
+            }
+            if (judge) //不冲突的场合
+            {
+                linkListNode* p1 = new linkListNode(*p);
+                p1->setData(*it); //注：同时lessonAmount++
+                if(tableCount>ui->maxRes->value()) return;
+                else if (p1->lessonAmount == majorList.size())
+                { //注：tableCount超过课表生成数上限limit时，不再新增课程
+                    possibleTable m(p1->table);
+                    m.scoring(costTable);
+                    result.push(m); //计数接口处
+                    tableCount++;
+                }
+                else
+                    QUEUE.insert(p1);
+            }
+        }
+        delete p;
+    }
+}
 //界面响应函数=======================================================================================
 //偏好学院
 void NKUCH::on_majorPush_clicked()

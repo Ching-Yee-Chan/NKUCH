@@ -13,6 +13,7 @@
 #include <QVector>
 #include <QListWidgetItem>
 #include <stack>
+#include <queue>
 
 typedef QListWidgetItem Qitem;
 
@@ -94,6 +95,7 @@ private:
     void getInfo();
     void noClassInRange(int begin, int end);
     void costTableInit();
+    void generateMajor();
     Ui::NKUCH *ui;
     int grade;
     QString major;
@@ -105,6 +107,7 @@ private:
     bool searchExec; //搜索窗口是否打开
     std::vector<std::vector<ClassInfo>> majorList;
     std::vector<ClassInfo> minorList;
+    std::priority_queue<possibleTable> result;
     int costTable[7][14];
 };
 #endif // NKUCH_H
