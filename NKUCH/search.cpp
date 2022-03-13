@@ -17,6 +17,7 @@ void search::initialize(){ //初始化
     ui->campus0->setChecked(campus0);
     ui->campus1->setChecked(campus1);
     ui->courseList->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    ui->major->setChecked(true);
     show();
 }
 
@@ -89,6 +90,7 @@ void search::on_run_clicked()
             haveRes = true;
             Qitem* obj=new Qitem;
             r.priority=ui->score->value(); //设置优先值
+            r.isMajor = ui->major->isChecked();
             obj->setData(Qt::UserRole,QVariant::fromValue(r));
             obj->setText(infoOf(r));
             ui->courseList->addItem(obj);

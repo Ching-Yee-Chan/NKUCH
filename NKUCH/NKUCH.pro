@@ -25,6 +25,7 @@ SOURCES += \
     teachersearch.cpp
 
 HEADERS += \
+    algorithm.h \
     dataset.h \
     detail.h \
     entry.h \

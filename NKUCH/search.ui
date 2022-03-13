@@ -203,7 +203,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>240</y>
+     <y>270</y>
      <width>91</width>
      <height>28</height>
     </rect>
@@ -216,7 +216,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>240</y>
+     <y>270</y>
      <width>91</width>
      <height>28</height>
     </rect>
@@ -232,7 +232,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>390</x>
-     <y>240</y>
+     <y>270</y>
      <width>51</width>
      <height>28</height>
     </rect>
@@ -268,7 +268,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>240</y>
+     <y>270</y>
      <width>61</width>
      <height>31</height>
     </rect>
@@ -292,7 +292,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>240</y>
+     <y>270</y>
      <width>81</width>
      <height>31</height>
     </rect>
@@ -398,7 +398,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>270</y>
+     <y>300</y>
      <width>291</width>
      <height>31</height>
     </rect>
@@ -422,7 +422,7 @@ p, li { white-space: pre-wrap; }
     <string notr="true">background-color:rgba(0,0,0,0);</string>
    </property>
    <property name="text">
-    <string>提示：1.必修课的优先度建议调至100</string>
+    <string>提示：1.双击以查看课程详情</string>
    </property>
    <property name="frame">
     <bool>false</bool>
@@ -438,7 +438,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>300</y>
+     <y>330</y>
      <width>421</width>
      <height>31</height>
     </rect>
@@ -556,44 +556,59 @@ p, li { white-space: pre-wrap; }
     <string>泰达</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_10">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
+  <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>330</y>
-     <width>421</width>
-     <height>31</height>
+     <x>190</x>
+     <y>240</y>
+     <width>201</width>
+     <height>21</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>宋体</family>
-     <pointsize>10</pointsize>
-    </font>
+   <property name="title">
+    <string/>
    </property>
-   <property name="cursor">
-    <cursorShape>BlankCursor</cursorShape>
-   </property>
-   <property name="mouseTracking">
-    <bool>false</bool>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
+   <widget class="QRadioButton" name="minor">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>0</y>
+      <width>115</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>否</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="major">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>0</y>
+      <width>61</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>是</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>240</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color:rgba(0,0,0,0);</string>
    </property>
    <property name="text">
-    <string>3.双击以查看课程详情</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
+    <string>是否必修课程</string>
    </property>
   </widget>
  </widget>

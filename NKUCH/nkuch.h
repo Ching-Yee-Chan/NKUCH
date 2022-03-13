@@ -1,7 +1,6 @@
 ﻿#ifndef NKUCH_H
 #define NKUCH_H
 
-
 #include <QWidget>
 #include <QMainWindow>
 #include <QMessageBox>
@@ -23,7 +22,7 @@ class NKUCH;
 class NKUCH : public QMainWindow
 {
     Q_OBJECT
-
+    friend class algorithm;
 public:
     explicit NKUCH(QWidget *parent = nullptr);
     ~NKUCH();
