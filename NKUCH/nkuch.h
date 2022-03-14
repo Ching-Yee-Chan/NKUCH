@@ -18,7 +18,6 @@
 
 typedef QListWidgetItem Qitem;
 
-
 const QString A_COURSE="通识必修课程";
 const QString B_COURSE="大类基础课程";
 const QString C_COURSE="专业必修课程";
@@ -91,12 +90,14 @@ private slots:
 private:
     void getPrefMajor();
     void getPrefTeacher();
+    void getPrefCourse();
     void spareTimeInit();
     void getCourseList();
     void getInfo();
     void noClassInRange(int begin, int end);
     void costTableInit();
     void generateMajor();
+    void generateMinor();
     Ui::NKUCH *ui;
     int grade;
     QString major;
@@ -108,7 +109,8 @@ private:
     bool searchExec; //搜索窗口是否打开
     std::vector<std::vector<ClassInfo>> majorList;
     std::vector<ClassInfo> minorList;
-    std::priority_queue<possibleTable> result;
+    std::priority_queue<possibleTable> majorResult;
+    std::vector<possibleTable> minorResult;
     int costTable[7][14];
 };
 #endif // NKUCH_H

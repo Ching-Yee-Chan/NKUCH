@@ -36,12 +36,13 @@ public:
         next = NULL;
         lessonAmount = 0;
     }
-    linkListNode(const ClassInfo info)
+    linkListNode(linkListNode& prev)//深拷贝
     {
-        memset(table, 0, 7 * 14 * 4);
-        setData(info);
+        for(int i=0;i<7;i++)
+            for(int j = 0;j<14;j++)
+                table[i][j] = prev.table[i][j];
         next = NULL;
-        lessonAmount = 1;
+        lessonAmount = prev.lessonAmount;
     }
     void setData(const ClassInfo info)
     {

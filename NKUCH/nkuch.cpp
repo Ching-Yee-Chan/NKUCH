@@ -146,6 +146,18 @@ void NKUCH::getPrefTeacher()
                 course.iterator->now->priority+=val*teacherWeight;
     }
 }
+//读取选定课程
+void NKUCH::getPrefCourse()
+{
+    for(int i=0;i<ui->courseList->count();i++){
+        ClassInfo temp = ui->courseList->item(i)->data(Qt::UserRole).value<ClassInfo>();
+        for(course.iterator=course.begin;course.iterator!=course.end;course.iterator=course.iterator->next)
+            if(course.iterator->now->id == temp.id){
+                course.iterator->now->isMajor = temp.isMajor;
+                course.iterator->now->priority += temp.priority;
+            }
+    }
+}
 //不上课时段作为编号9999的必修课加入===============================================================================================
 void NKUCH::spareTimeInit()
 {
@@ -207,16 +219,13 @@ void NKUCH::costTableInit()
                 if (minorList[i].priority > costTable[minorList[i].arrange[j].weekDay - 1][j])
                     costTable[minorList[i].arrange[j].weekDay - 1][j] = minorList[i].priority;
 }
-//核心算法一：必修课候选课表生成
+//核心算法一：必修课候选课表生成======================================================================================
 void NKUCH::generateMajor()
 {
     int tableCount=0; //生成课表的数目
     linkListQueue QUEUE;
-    for (std::vector<ClassInfo>::iterator it = majorList[0].begin();it < majorList[0].end();++it)//首门课入队
-    {
-        linkListNode* p = new linkListNode(*it);
-        QUEUE.insert(p);
-    }
+    linkListNode* p = new linkListNode();
+    QUEUE.insert(p);
     while (!QUEUE.isEmpty())
     {
         linkListNode* p = QUEUE.getElement(); //出队并返回该值
@@ -226,7 +235,7 @@ void NKUCH::generateMajor()
             bool judge = true;//判断变量，false为冲突
             for(int i = 0;i<it->arrangeSize&&judge;i++)
             {
-                for(int j = it->arrange[i].startTime-1;j<it->arrange[i].endTime;j++)
+                for(int j = it->arrange[i].startUnit-1;j<it->arrange[i].endUnit;j++)
                     if(p->table[it->arrange[i].weekDay-1][j])
                     {
                         judge = false;
@@ -242,7 +251,7 @@ void NKUCH::generateMajor()
                 { //注：tableCount超过课表生成数上限limit时，不再新增课程
                     possibleTable m(p1->table);
                     m.scoring(costTable);
-                    result.push(m); //计数接口处
+                    majorResult.push(m); //计数接口处
                     tableCount++;
                 }
                 else
@@ -250,6 +259,15 @@ void NKUCH::generateMajor()
             }
         }
         delete p;
+    }
+}
+//核心算法二：加入选修课===============================================================================
+void NKUCH::generateMinor()
+{
+    while(!majorResult.empty())
+    {
+        minorResult.push_back(majorResult.top());
+        majorResult.pop();
     }
 }
 //界面响应函数=======================================================================================
@@ -626,13 +644,29 @@ void NKUCH::on_run_clicked()
         return;
     }
     resExec=true;
-    Loading loading; //渲染加载窗口
+    //渲染加载窗口
+    Loading loading;
     loading.show();
-    //算法函数调用位置
+    //调用视图层与逻辑层接口
+    getPrefMajor();
+    getPrefTeacher();
+    getPrefCourse();
+    spareTimeInit();
+    //核心算法所需数据准备
+    getCourseList();
+    costTableInit();
+    //核心算法
+    generateMajor();
+    generateMinor();
+    //运算结束，关闭加载提示框
     loading.close();
+    //显示结果
     ShowResult resWin;
-    resWin.show();
+    resWin.initialize(minorResult, course);
     if(resWin.exec()==QDialog::Accepted){ //关闭窗口的处理
-        ;
+        int i=0;
+    }
+    else{
+        int j = 1;
     }
 }
