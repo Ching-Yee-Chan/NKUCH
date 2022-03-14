@@ -628,5 +628,11 @@ void NKUCH::on_run_clicked()
     resExec=true;
     Loading loading; //渲染加载窗口
     loading.show();
-
+    //算法函数调用位置
+    loading.close();
+    ShowResult resWin;
+    resWin.show();
+    if(resWin.exec()==QDialog::Accepted){ //关闭窗口的处理
+        ;
+    }
 }

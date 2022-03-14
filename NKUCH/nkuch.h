@@ -8,6 +8,7 @@
 #include "entry.h"
 #include "dataset.h"
 #include "search.h"
+#include "showresult.h"
 #include "teachersearch.h"
 #include "algorithm.h"
 #include <QVector>

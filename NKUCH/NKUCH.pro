@@ -22,6 +22,7 @@ SOURCES += \
     entry.cpp \
     nkuch.cpp \
     search.cpp \
+    showresult.cpp \
     teachersearch.cpp
 
 HEADERS += \
@@ -32,6 +33,7 @@ HEADERS += \
     loading.h \
     nkuch.h \
     search.h \
+    showresult.h \
     teachersearch.h
 
 FORMS += \
@@ -40,6 +42,7 @@ FORMS += \
     loading.ui \
     nkuch.ui \
     search.ui \
+    showresult.ui \
     teachersearch.ui
 
 TRANSLATIONS += \
