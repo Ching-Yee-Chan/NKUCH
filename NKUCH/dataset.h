@@ -1,6 +1,7 @@
 ﻿#ifndef DATASET_H
 #define DATASET_H
 #include<QWidget>
+#include<set>
 namespace Ui { struct ClassInfo; struct arrangeInfo; struct expLessonGroups;}
 
 static inline QString weekConv(int a){ //数字变汉字

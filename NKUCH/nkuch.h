@@ -15,6 +15,7 @@
 #include <QListWidgetItem>
 #include <stack>
 #include <queue>
+#include <set>
 
 typedef QListWidgetItem Qitem;
 
@@ -109,7 +110,7 @@ private:
     bool searchExec; //搜索窗口是否打开
     std::vector<std::vector<ClassInfo>> majorList;
     std::vector<ClassInfo> minorList;
-    std::priority_queue<possibleTable> majorResult;
+    std::stack<possibleTable> majorResult;
     std::vector<possibleTable> minorResult;
     int costTable[7][14];
 };

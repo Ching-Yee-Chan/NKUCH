@@ -138,7 +138,7 @@ void NKUCH::getPrefMajor()
 //读取教师偏好
 void NKUCH::getPrefTeacher()
 {
-    for(int i=0;i<ui->majorList->count();i++){ //遍历偏好教师列表
+    for(int i=0;i<ui->teacherList->count();i++){ //遍历偏好教师列表
         int val=ui->teacherList->item(i)->data(Qt::UserRole).value<Teacher>().priority;
         QString obj=ui->teacherList->item(i)->data(Qt::UserRole).value<Teacher>().teacherId;
         for(course.iterator=course.begin;course.iterator!=course.end;course.iterator=course.iterator->next)
@@ -205,7 +205,7 @@ void NKUCH::getCourseList()
             else if(temp.courseTypeName!=E_COURSE){//其他专业专业课，减分
                 temp.priority -= otherMajorDecline;
             }
-            if(temp.priority) minorList.push_back(temp);//加入选修课心愿单
+            if(temp.priority&&temp.id) minorList.push_back(temp);//加入选修课心愿单
         }
     }
 }
@@ -250,7 +250,7 @@ void NKUCH::generateMajor()
                 else if (p1->lessonAmount == majorList.size())
                 { //注：tableCount超过课表生成数上限limit时，不再新增课程
                     possibleTable m(p1->table);
-                    m.scoring(costTable);
+                    m.scoringMajor(costTable);
                     majorResult.push(m); //计数接口处
                     tableCount++;
                 }
@@ -264,10 +264,59 @@ void NKUCH::generateMajor()
 //核心算法二：加入选修课===============================================================================
 void NKUCH::generateMinor()
 {
+    std::priority_queue<possibleTable> queue;
     while(!majorResult.empty())
     {
-        minorResult.push_back(majorResult.top());
+        possibleTable temp = majorResult.top();
         majorResult.pop();
+        for(int i=0;i<minorList.size();i++){
+            std::set<int> buffer;//待定课程回收站
+            double score = 0;
+            int count = 0;//总冲突课时数
+            bool canReplace = true;
+            for(int j = 0;j<minorList[i].arrangeSize;j++)
+                for(int k = minorList[i].arrange[j].startUnit-1;k<minorList[i].arrange[j].endUnit;j++)
+                    if(temp.table[minorList[i].arrange[j].weekDay-1][k]){//有课
+                        int no = temp.table[minorList[i].arrange[j].weekDay-1][k];
+                        ClassInfo info;
+                        if(no!=9999){//不上课时段被排除，一定可以找到
+                            for(course.iterator = course.begin;course.iterator!=course.end;course.iterator = course.iterator->next){
+                                if(course.iterator->now->no.toInt()==no){
+                                    info = *(course.iterator->now);
+                                }
+                            }
+                        }
+                        if(no==9999||info.isMajor){//不上课时段或必修课，标记
+                            canReplace = false;
+                        }
+                        else{
+                            score += info.priority/((double)info.period/(info.endWeek-info.startWeek+1));
+                            buffer.insert(no);
+                            count++;
+                        }
+                    }
+            if(!canReplace) continue;//不上课时段或必修课，跳过
+            double initScore = count?score/count:0;
+            double newScore = (double)minorList[i].priority/((double)minorList[i].period/(minorList[i].endWeek-minorList[i].startWeek+1));
+            if(newScore>initScore){
+                for(int row = 0;row<7;row++)
+                    for(int col = 0;col<14;col++)
+                        if(buffer.find(temp.table[row][col])!=buffer.end())//在集合中
+                            temp.table[row][col] = 0;//删除这些课程
+                for(int j = 0;j<minorList[i].arrangeSize;j++)
+                    for(int k = minorList[i].arrange[j].startUnit-1;k<minorList[i].arrange[j].endUnit;j++)
+                        temp.table[minorList[i].arrange[j].weekDay-1][k] = minorList[i].no.toInt();
+            }
+        }
+        //选修课添加完毕，开始排序
+        temp.scoringMinor(course);
+        queue.push(temp);
+    }
+    //排序完毕，将结果输出至minorResult
+    while(!queue.empty())
+    {
+        minorResult.push_back(queue.top());
+        queue.pop();
     }
 }
 //界面响应函数=======================================================================================
@@ -641,6 +690,10 @@ void NKUCH::on_run_clicked()
 {
     if(resExec){ //防止同时打开两个生成窗口
         QMessageBox::warning(this,"警告","请不要同时打开两个相同的窗口。",QMessageBox::Ok);
+        return;
+    }
+    if(ui->courseList->size().isEmpty()){
+        QMessageBox::warning(this,"警告","必修课表不能为空！",QMessageBox::Ok);
         return;
     }
     resExec=true;

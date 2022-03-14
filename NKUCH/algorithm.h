@@ -16,12 +16,24 @@ struct possibleTable
     {
         return table.score < this->score;
     }
-    void scoring(int scoreTable[][14])//打分函数
+    void scoringMajor(int scoreTable[][14])//必修课打分函数，减去成本
     {
         for (int i = 0;i < 7;i++)
             for (int j = 0;j < 14;j++)
                 if (!table[i][j])
                     score -= scoreTable[i][j];
+    }
+    void scoringMinor(ArrayForClass& course)//选修课打分函数，加上收益
+    {
+        std::set<int> allCourse;
+        for (int i = 0;i < 7;i++)
+            for (int j = 0;j < 14;j++)
+                if (!table[i][j]&&table[i][j]!=9999){
+                    allCourse.insert(table[i][j]);
+                }
+        for(course.iterator = course.begin;course.iterator!=course.end;course.iterator = course.iterator->next)
+            if(allCourse.count(course.iterator->now->no.toInt()))//该课程被选
+                score += course.iterator->now->priority;
     }
 };
 //Q_DECLARE_METATYPE(possibleTable)
