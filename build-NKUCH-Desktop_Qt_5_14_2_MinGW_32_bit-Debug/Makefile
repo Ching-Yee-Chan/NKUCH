@@ -247,6 +247,7 @@ Makefile: ../NKUCH/NKUCH.pro ../../../QT/5.14.2/mingw73_32/mkspecs/win32-g++/qma
 		../../../QT/5.14.2/mingw73_32/mkspecs/features/qt_config.prf \
 		../../../QT/5.14.2/mingw73_32/mkspecs/win32-g++/qmake.conf \
 		../../../QT/5.14.2/mingw73_32/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../QT/5.14.2/mingw73_32/mkspecs/features/exclusive_builds.prf \
 		../../../QT/5.14.2/mingw73_32/mkspecs/features/toolchain.prf \
 		../../../QT/5.14.2/mingw73_32/mkspecs/features/default_pre.prf \
@@ -275,7 +276,6 @@ Makefile: ../NKUCH/NKUCH.pro ../../../QT/5.14.2/mingw73_32/mkspecs/win32-g++/qma
 		../../../QT/5.14.2/mingw73_32/lib/Qt5Gui.prl \
 		../../../QT/5.14.2/mingw73_32/lib/Qt5Core.prl \
 		../../../QT/5.14.2/mingw73_32/lib/qtmain.prl \
-		.qmake.stash \
 		../../../QT/5.14.2/mingw73_32/mkspecs/features/build_pass.prf
 	$(QMAKE) -o Makefile ..\NKUCH\NKUCH.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 ../../../QT/5.14.2/mingw73_32/mkspecs/features/spec_pre.prf:
@@ -455,6 +455,7 @@ Makefile: ../NKUCH/NKUCH.pro ../../../QT/5.14.2/mingw73_32/mkspecs/win32-g++/qma
 ../../../QT/5.14.2/mingw73_32/mkspecs/features/qt_config.prf:
 ../../../QT/5.14.2/mingw73_32/mkspecs/win32-g++/qmake.conf:
 ../../../QT/5.14.2/mingw73_32/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../QT/5.14.2/mingw73_32/mkspecs/features/exclusive_builds.prf:
 ../../../QT/5.14.2/mingw73_32/mkspecs/features/toolchain.prf:
 ../../../QT/5.14.2/mingw73_32/mkspecs/features/default_pre.prf:
@@ -483,7 +484,6 @@ Makefile: ../NKUCH/NKUCH.pro ../../../QT/5.14.2/mingw73_32/mkspecs/win32-g++/qma
 ../../../QT/5.14.2/mingw73_32/lib/Qt5Gui.prl:
 ../../../QT/5.14.2/mingw73_32/lib/Qt5Core.prl:
 ../../../QT/5.14.2/mingw73_32/lib/qtmain.prl:
-.qmake.stash:
 ../../../QT/5.14.2/mingw73_32/mkspecs/features/build_pass.prf:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\NKUCH\NKUCH.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"

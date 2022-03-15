@@ -11,9 +11,9 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QDialog>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QTextBrowser>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -23,26 +23,27 @@ public:
     QLabel *label;
     QTextBrowser *textBrowser;
 
-    void setupUi(QDialog *Loading)
+    void setupUi(QWidget *Loading)
     {
         if (Loading->objectName().isEmpty())
             Loading->setObjectName(QString::fromUtf8("Loading"));
-        Loading->resize(355, 227);
+        Loading->resize(400, 300);
         label = new QLabel(Loading);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(20, 20, 201, 16));
+        label->setGeometry(QRect(40, 30, 281, 31));
+        label->setStyleSheet(QString::fromUtf8("font: 14pt \"3ds\";"));
         textBrowser = new QTextBrowser(Loading);
         textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
-        textBrowser->setGeometry(QRect(20, 50, 311, 151));
+        textBrowser->setGeometry(QRect(40, 70, 321, 192));
 
         retranslateUi(Loading);
 
         QMetaObject::connectSlotsByName(Loading);
     } // setupUi
 
-    void retranslateUi(QDialog *Loading)
+    void retranslateUi(QWidget *Loading)
     {
-        Loading->setWindowTitle(QCoreApplication::translate("Loading", "Dialog", nullptr));
+        Loading->setWindowTitle(QCoreApplication::translate("Loading", "Form", nullptr));
         label->setText(QCoreApplication::translate("Loading", "\346\255\243\345\234\250\347\224\237\346\210\220\350\257\276\350\241\250\357\274\214\350\257\267\347\250\215\345\200\231...", nullptr));
     } // retranslateUi
 

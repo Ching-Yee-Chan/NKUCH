@@ -1,11 +1,6 @@
 ﻿#include "nkuch.h"
 #include "ui_nkuch.h"
 
-const double majorWeight = 0.5;
-const double teacherWeight = 0.5;
-const int myMajorLoyalty = 50;
-const int otherMajorDecline = 30;
-
 inline int campusConv(QString s){ //校区编号变整数
     if(s=="01") return 0;
     else if(s=="03") return 2;
@@ -124,6 +119,15 @@ void NKUCH::initialize()
     searchExec=false;
     entryExec=false;
 }
+//参数值读取================================================================================================================
+void NKUCH::getArgs()
+{
+    majorWeight = (double)(ui->majorPref->value())/100;
+    teacherWeight = (double)(ui->teacherPref->value())/100;
+    myMajorLoyalty = ui->myMajorLoyalty->value();
+    otherMajorDecline = ui->otherMajorDecline->value();
+    ECoursePref = ui->ECoursePref->value();
+}
 //读取学院偏好==============================================================================================================
 void NKUCH::getPrefMajor()
 {
@@ -169,6 +173,7 @@ void NKUCH::spareTimeInit()
         _temp.arrange[0].weekDay = temp.day;
         _temp.arrange[0].startUnit = temp.start;
         _temp.arrange[0].endUnit = temp.end;
+        _temp.isMajor = true;
         std::vector<ClassInfo> tempVector;
         tempVector.push_back(_temp);
         majorList.push_back(tempVector);
@@ -194,6 +199,7 @@ void NKUCH::getCourseList()
             majorList.push_back(tempVector);
         }
         else{
+            if(temp.courseTypeName == E_COURSE) temp.priority += ECoursePref;//E类课增益
             if(temp.code.indexOf(majorConv(major))>=0){
                 if(temp.courseTypeName==D_COURSE){//专业选修课，加分
                     temp.priority += myMajorLoyalty;
@@ -246,7 +252,7 @@ void NKUCH::generateMajor()
             {
                 linkListNode* p1 = new linkListNode(*p);
                 p1->setData(*it); //注：同时lessonAmount++
-                if(tableCount>ui->maxRes->value()) return;
+                if(tableCount>=ui->maxRes->value()) return;
                 else if (p1->lessonAmount == majorList.size())
                 { //注：tableCount超过课表生成数上限limit时，不再新增课程
                     possibleTable m(p1->table);
@@ -275,7 +281,7 @@ void NKUCH::generateMinor()
             int count = 0;//总冲突课时数
             bool canReplace = true;
             for(int j = 0;j<minorList[i].arrangeSize;j++)
-                for(int k = minorList[i].arrange[j].startUnit-1;k<minorList[i].arrange[j].endUnit;j++)
+                for(int k = minorList[i].arrange[j].startUnit-1;k<minorList[i].arrange[j].endUnit;k++)
                     if(temp.table[minorList[i].arrange[j].weekDay-1][k]){//有课
                         int no = temp.table[minorList[i].arrange[j].weekDay-1][k];
                         ClassInfo info;
@@ -304,7 +310,7 @@ void NKUCH::generateMinor()
                         if(buffer.find(temp.table[row][col])!=buffer.end())//在集合中
                             temp.table[row][col] = 0;//删除这些课程
                 for(int j = 0;j<minorList[i].arrangeSize;j++)
-                    for(int k = minorList[i].arrange[j].startUnit-1;k<minorList[i].arrange[j].endUnit;j++)
+                    for(int k = minorList[i].arrange[j].startUnit-1;k<minorList[i].arrange[j].endUnit;k++)
                         temp.table[minorList[i].arrange[j].weekDay-1][k] = minorList[i].no.toInt();
             }
         }
@@ -627,18 +633,6 @@ void NKUCH::on_intercampus_stateChanged(int arg1)
     intercampus=ui->intercampus->isChecked();
 }
 
-void NKUCH::on_maximum_valueChanged(int arg1)
-{
-    if(arg1<ui->minimum->value())
-        ui->minimum->setValue(ui->maximum->value());
-}
-
-void NKUCH::on_minimum_valueChanged(int arg1)
-{
-    if(arg1>ui->maximum->value())
-        ui->minimum->setValue(ui->maximum->value());
-}
-
 void NKUCH::on_start_currentIndexChanged(int index)
 {
     if(ui->end->currentIndex()!=0 && index>=ui->end->currentIndex())
@@ -685,6 +679,13 @@ void NKUCH::on_reChoose_clicked()
         ent.close();
     }
 }
+
+void NKUCH::refresh()
+{
+    for(course.iterator = course.begin;course.iterator != course.end;course.iterator = course.iterator->next)
+        course.iterator->now->priority = 0;
+    resExec = false;
+}
 //启动！=======================================================================================================
 void NKUCH::on_run_clicked()
 {
@@ -698,9 +699,10 @@ void NKUCH::on_run_clicked()
     }
     resExec=true;
     //渲染加载窗口
-    Loading loading;
-    loading.show();
+    Loading* loading = new Loading();
+    loading->show();
     //调用视图层与逻辑层接口
+    getArgs();
     getPrefMajor();
     getPrefTeacher();
     getPrefCourse();
@@ -710,9 +712,15 @@ void NKUCH::on_run_clicked()
     costTableInit();
     //核心算法
     generateMajor();
+    if(majorResult.empty()){
+        QMessageBox::warning(this,"警告","没有满足条件的课程！",QMessageBox::Ok);
+        refresh();
+        return;
+    }
     generateMinor();
     //运算结束，关闭加载提示框
-    loading.close();
+    loading->close();
+    this->show();
     //显示结果
     ShowResult resWin;
     resWin.initialize(minorResult, course);
@@ -720,6 +728,7 @@ void NKUCH::on_run_clicked()
         int i=0;
     }
     else{
-        int j = 1;
+        refresh();
     }
+
 }

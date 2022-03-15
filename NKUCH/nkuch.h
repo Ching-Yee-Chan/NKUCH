@@ -74,10 +74,6 @@ private slots:
 
     void on_coursePop_clicked();
 
-    void on_maximum_valueChanged(int arg1);
-
-    void on_minimum_valueChanged(int arg1);
-
     void on_start_currentIndexChanged(int index);
 
     void on_end_currentIndexChanged(int index);
@@ -89,6 +85,7 @@ private slots:
     void on_intercampus_stateChanged(int arg1);
 
 private:
+    void getArgs();
     void getPrefMajor();
     void getPrefTeacher();
     void getPrefCourse();
@@ -99,6 +96,7 @@ private:
     void costTableInit();
     void generateMajor();
     void generateMinor();
+    void refresh();
     Ui::NKUCH *ui;
     int grade;
     QString major;
@@ -108,6 +106,13 @@ private:
     bool resExec; //结果窗口是否打开
     bool entryExec; //重新选择窗口是否打开
     bool searchExec; //搜索窗口是否打开
+    //参数表
+    double majorWeight = 0.5;
+    double teacherWeight = 0.5;
+    int myMajorLoyalty = 30;
+    int otherMajorDecline = 30;
+    int ECoursePref = 40;
+    //容器
     std::vector<std::vector<ClassInfo>> majorList;
     std::vector<ClassInfo> minorList;
     std::stack<possibleTable> majorResult;

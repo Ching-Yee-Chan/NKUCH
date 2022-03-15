@@ -369,8 +369,8 @@ release/moc_entry.cpp: ../NKUCH/entry.h \
 	D:\QT\5.14.2\mingw73_32\bin\moc.exe $(DEFINES) --include D:/git/NKUCH/build-NKUCH-Desktop_Qt_5_14_2_MinGW_32_bit-Debug/release/moc_predefs.h -ID:/QT/5.14.2/mingw73_32/mkspecs/win32-g++ -ID:/git/NKUCH/NKUCH -ID:/QT/5.14.2/mingw73_32/include -ID:/QT/5.14.2/mingw73_32/include/QtWidgets -ID:/QT/5.14.2/mingw73_32/include/QtGui -ID:/QT/5.14.2/mingw73_32/include/QtANGLE -ID:/QT/5.14.2/mingw73_32/include/QtCore -I. -ID:/QT/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++ -ID:/QT/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32 -ID:/QT/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward -ID:/QT/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include -ID:/QT/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include-fixed -ID:/QT/Tools/mingw730_32/i686-w64-mingw32/include ..\NKUCH\entry.h -o release\moc_entry.cpp
 
 release/moc_loading.cpp: ../NKUCH/loading.h \
-		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QDialog \
-		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qdialog.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QWidget \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qwidget.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtwidgetsglobal.h \
 		../../../QT/5.14.2/mingw73_32/include/QtGui/qtguiglobal.h \
 		../../../QT/5.14.2/mingw73_32/include/QtCore/qglobal.h \
@@ -396,7 +396,6 @@ release/moc_loading.cpp: ../NKUCH/loading.h \
 		../../../QT/5.14.2/mingw73_32/include/QtCore/qversiontagging.h \
 		../../../QT/5.14.2/mingw73_32/include/QtGui/qtgui-config.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtwidgets-config.h \
-		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qwidget.h \
 		../../../QT/5.14.2/mingw73_32/include/QtGui/qwindowdefs.h \
 		../../../QT/5.14.2/mingw73_32/include/QtCore/qobjectdefs.h \
 		../../../QT/5.14.2/mingw73_32/include/QtCore/qnamespace.h \
@@ -591,8 +590,8 @@ release/moc_nkuch.cpp: ../NKUCH/nkuch.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qmessagebox.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qdialog.h \
 		../NKUCH/loading.h \
-		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QDialog \
 		../NKUCH/entry.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QDialog \
 		../NKUCH/dataset.h \
 		../NKUCH/search.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QListWidgetItem \
@@ -620,6 +619,8 @@ release/moc_nkuch.cpp: ../NKUCH/nkuch.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QTableWidget \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtablewidget.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtableview.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QFile \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QTextStream \
 		../NKUCH/algorithm.h \
 		../NKUCH/teachersearch.h \
 		../NKUCH/nkuch.h \
@@ -891,6 +892,10 @@ release/moc_showresult.cpp: ../NKUCH/showresult.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtabbar.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtabwidget.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qrubberband.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QMessageBox \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qmessagebox.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QFile \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QTextStream \
 		../NKUCH/algorithm.h \
 		../NKUCH/dataset.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QWidget \
@@ -1041,6 +1046,8 @@ release/moc_teachersearch.cpp: ../NKUCH/teachersearch.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QTableWidget \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtablewidget.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtableview.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QFile \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QTextStream \
 		../NKUCH/algorithm.h \
 		../NKUCH/teachersearch.h \
 		../../../QT/5.14.2/mingw73_32/include/QtCore/QVector \
@@ -1203,12 +1210,32 @@ release/detail.o: ../NKUCH/detail.cpp ../NKUCH/detail.h \
 		../../../QT/5.14.2/mingw73_32/include/QtGui/qtouchdevice.h \
 		../NKUCH/dataset.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QWidget \
-		ui_detail.h
+		ui_detail.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QVariant \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QApplication \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qcoreapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qeventloop.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qguiapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qinputmethod.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QLabel \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qlabel.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qframe.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QTextBrowser \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtextbrowser.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtextedit.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextdocument.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextoption.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextcursor.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextformat.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qpen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\detail.o ..\NKUCH\detail.cpp
 
 release/loading.o: ../NKUCH/loading.cpp ../NKUCH/loading.h \
-		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QDialog \
-		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qdialog.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QWidget \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qwidget.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtwidgetsglobal.h \
 		../../../QT/5.14.2/mingw73_32/include/QtGui/qtguiglobal.h \
 		../../../QT/5.14.2/mingw73_32/include/QtCore/qglobal.h \
@@ -1234,7 +1261,6 @@ release/loading.o: ../NKUCH/loading.cpp ../NKUCH/loading.h \
 		../../../QT/5.14.2/mingw73_32/include/QtCore/qversiontagging.h \
 		../../../QT/5.14.2/mingw73_32/include/QtGui/qtgui-config.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtwidgets-config.h \
-		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qwidget.h \
 		../../../QT/5.14.2/mingw73_32/include/QtGui/qwindowdefs.h \
 		../../../QT/5.14.2/mingw73_32/include/QtCore/qobjectdefs.h \
 		../../../QT/5.14.2/mingw73_32/include/QtCore/qnamespace.h \
@@ -1312,7 +1338,33 @@ release/loading.o: ../NKUCH/loading.cpp ../NKUCH/loading.h \
 		../../../QT/5.14.2/mingw73_32/include/QtCore/qfiledevice.h \
 		../../../QT/5.14.2/mingw73_32/include/QtGui/qvector2d.h \
 		../../../QT/5.14.2/mingw73_32/include/QtGui/qtouchdevice.h \
-		ui_loading.h
+		ui_loading.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QVariant \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QApplication \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qcoreapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qeventloop.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qguiapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qinputmethod.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QDialog \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qdialog.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QLabel \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qlabel.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qframe.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QPushButton \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qpushbutton.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qicon.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QTextBrowser \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtextbrowser.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtextedit.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextdocument.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextoption.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextcursor.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextformat.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qpen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\loading.o ..\NKUCH\loading.cpp
 
 release/main.o: ../NKUCH/main.cpp ../NKUCH/entry.h \
@@ -1457,6 +1509,8 @@ release/main.o: ../NKUCH/main.cpp ../NKUCH/entry.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QTableWidget \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtablewidget.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtableview.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QFile \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QTextStream \
 		../NKUCH/algorithm.h \
 		../NKUCH/teachersearch.h \
 		../../../QT/5.14.2/mingw73_32/include/QtCore/QVector \
@@ -1576,6 +1630,42 @@ release/entry.o: ../NKUCH/entry.cpp ../NKUCH/entry.h \
 		../../../QT/5.14.2/mingw73_32/include/QtGui/qvector2d.h \
 		../../../QT/5.14.2/mingw73_32/include/QtGui/qtouchdevice.h \
 		ui_entry.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QVariant \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QApplication \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qcoreapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qeventloop.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qguiapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qinputmethod.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QCheckBox \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qcheckbox.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qicon.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QComboBox \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qcombobox.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qabstractitemdelegate.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qstyleoption.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qabstractspinbox.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qvalidator.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qregularexpression.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qslider.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qabstractslider.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qstyle.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtabbar.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtabwidget.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qrubberband.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qframe.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qabstractitemmodel.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QLineEdit \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qlineedit.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextcursor.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextformat.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qpen.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextoption.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QPushButton \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qpushbutton.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QWidget \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QMessageBox \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\entry.o ..\NKUCH\entry.cpp
@@ -1693,8 +1783,8 @@ release/nkuch.o: ../NKUCH/nkuch.cpp ../NKUCH/nkuch.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qmessagebox.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qdialog.h \
 		../NKUCH/loading.h \
-		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QDialog \
 		../NKUCH/entry.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QDialog \
 		../NKUCH/dataset.h \
 		../NKUCH/search.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QListWidgetItem \
@@ -1722,10 +1812,44 @@ release/nkuch.o: ../NKUCH/nkuch.cpp ../NKUCH/nkuch.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QTableWidget \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtablewidget.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtableview.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QFile \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QTextStream \
 		../NKUCH/algorithm.h \
 		../NKUCH/teachersearch.h \
 		../../../QT/5.14.2/mingw73_32/include/QtCore/QVector \
-		ui_nkuch.h
+		ui_nkuch.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QVariant \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QApplication \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qcoreapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qeventloop.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qguiapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qinputmethod.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QCheckBox \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qcheckbox.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QComboBox \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qcombobox.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QFrame \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QLineEdit \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qlineedit.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextcursor.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextformat.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qpen.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextoption.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QListWidget \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QPushButton \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qpushbutton.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QScrollArea \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qscrollarea.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QSpinBox \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qspinbox.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QTextBrowser \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtextbrowser.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtextedit.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextdocument.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QTextEdit
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\nkuch.o ..\NKUCH\nkuch.cpp
 
 release/search.o: ../NKUCH/search.cpp ../NKUCH/search.h \
@@ -1861,7 +1985,40 @@ release/search.o: ../NKUCH/search.cpp ../NKUCH/search.h \
 		../NKUCH/dataset.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QWidget \
 		../NKUCH/detail.h \
-		ui_search.h
+		ui_search.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QVariant \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QApplication \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qcoreapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qeventloop.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qguiapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qinputmethod.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QCheckBox \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qcheckbox.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QGroupBox \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qgroupbox.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QLabel \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qlabel.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QLineEdit \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qlineedit.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextcursor.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextformat.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qpen.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextoption.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QListWidget \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QPushButton \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qpushbutton.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QRadioButton \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qradiobutton.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QScrollArea \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qscrollarea.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QSpinBox \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qspinbox.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QTextEdit \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtextedit.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextdocument.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\search.o ..\NKUCH\search.cpp
 
 release/showresult.o: ../NKUCH/showresult.cpp ../NKUCH/showresult.h \
@@ -1990,10 +2147,40 @@ release/showresult.o: ../NKUCH/showresult.cpp ../NKUCH/showresult.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtabbar.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtabwidget.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qrubberband.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QMessageBox \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qmessagebox.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QFile \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QTextStream \
 		../NKUCH/algorithm.h \
 		../NKUCH/dataset.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QWidget \
-		ui_showresult.h
+		ui_showresult.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QVariant \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QApplication \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qcoreapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qeventloop.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qguiapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qinputmethod.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QHeaderView \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qheaderview.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QLineEdit \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qlineedit.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextcursor.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextformat.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qpen.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextoption.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QPushButton \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qpushbutton.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qabstractbutton.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QScrollArea \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qscrollarea.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QSpinBox \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qspinbox.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QTextEdit \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtextedit.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qtextdocument.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\showresult.o ..\NKUCH\showresult.cpp
 
 release/teachersearch.o: ../NKUCH/teachersearch.cpp ../NKUCH/teachersearch.h \
@@ -2139,9 +2326,26 @@ release/teachersearch.o: ../NKUCH/teachersearch.cpp ../NKUCH/teachersearch.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QTableWidget \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtablewidget.h \
 		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qtableview.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QFile \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QTextStream \
 		../NKUCH/algorithm.h \
 		../../../QT/5.14.2/mingw73_32/include/QtCore/QVector \
-		ui_teachersearch.h
+		ui_teachersearch.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/QVariant \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QApplication \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qcoreapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtCore/qeventloop.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qguiapplication.h \
+		../../../QT/5.14.2/mingw73_32/include/QtGui/qinputmethod.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QDialogButtonBox \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qdialogbuttonbox.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QLabel \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qlabel.h \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QListWidget \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/QScrollArea \
+		../../../QT/5.14.2/mingw73_32/include/QtWidgets/qscrollarea.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\teachersearch.o ..\NKUCH\teachersearch.cpp
 
 release/moc_detail.o: release/moc_detail.cpp 
